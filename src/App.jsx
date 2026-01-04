@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Github, Linkedin, Mail, ChevronDown, Code, Server, Database, Cloud, Terminal, ExternalLink, Moon, Sun, Monitor, Cpu, Briefcase, BookOpen, Settings } from 'lucide-react';
-
+import { GitHub, LinkedIn, Email, ExpandMore, Storage, Dns, Cloud, Terminal, OpenInNew, DarkMode, LightMode, DesktopWindows, Memory, Work, MenuBook, Settings, Facebook, Instagram, WhatsApp } from '@mui/icons-material';
+import XIcon from '@mui/icons-material/X';
 // --- Datos actualizados con la trayectoria completa ---
 const personalInfo = {
   name: "Mario De La Cruz Sandoval",
@@ -10,7 +10,11 @@ const personalInfo = {
   social: {
     linkedin: "https://www.linkedin.com/in/ingmario/",
     email: "mailto:mario@de-la-cruz.com",
-    github: "https://mariotip.github.io/"
+    github: "https://github.com/mariotip",
+    facebook: "https://www.facebook.com/ingmario/",
+    instagram: "https://www.instagram.com/ingmario/",
+    twitter: "https://x.com/mario_Tip",
+    whatsapp: "https://wa.me/3312182604"
   }
 };
 
@@ -21,15 +25,17 @@ const experience = [
     period: "Mar. 2022 - Actualidad",
     location: "Zapopan, Jalisco",
     description: "Desarrollo integral de aplicaciones web. Implementación de FrontEnd con Angular y React. Backend robusto con Node.js y Sequelize. Gestión de infraestructura y despliegue en AWS.",
-    stack: ["Angular", "React", "Node.js", "Sequelize", "MySQL", "AWS", "Ubuntu", "Adonis"]
+    stack: ["Angular", "React", "Node.js", "Sequelize", "MySQL", "AWS", "Ubuntu", "Adonis"],
+    link: "https://www.garantia.mx/"
   },
   {
     company: "Turnapp",
     role: "Full Stack Developer",
     period: "Nov. 2020 - Jul. 2022",
-    location: "Guadalajara, Jalisco",
+    location: "Zapopan, Jalisco",
     description: "Desarrollo Fullstack centrado en la agilidad. Frontend desarrollado en Vue.js y Backend en Laravel. Despliegue y gestión de servicios mediante AWS LightSail.",
-    stack: ["Vue.js", "Laravel", "AWS LightSail", "PHP", "MySQL"]
+    stack: ["Vue.js", "Laravel", "AWS LightSail", "PHP", "MySQL"],
+    link: "https://turn.com.mx/"
   },
   {
     company: "Metapack",
@@ -37,7 +43,8 @@ const experience = [
     period: "Feb. 2020 - Abr. 2021",
     location: "Guadalajara, México",
     description: "Desarrollo de APIs REST con Laravel y MySQL. Creación de componentes modulares en Angular con Bootstrap. Administración de servidores Apache en entornos Linux.",
-    stack: ["Angular", "Laravel", "MySQL", "Bootstrap", "Apache", "Linux"]
+    stack: ["Angular", "Laravel", "MySQL", "Bootstrap", "Apache", "Linux"],
+    link: "https://www.metapack.com/"
   },
   {
     company: "Samahara Startup",
@@ -45,7 +52,8 @@ const experience = [
     period: "Jul. 2019 - Feb. 2020",
     location: "Hermosa Provincia",
     description: "Backend con Node.js y AdonisJS 4.1 usando Lucid ORM y MongoDB. Soporte en aplicaciones móviles con React Native y desarrollo de APIs en Django REST Framework con PostgreSQL.",
-    stack: ["Node.js", "AdonisJS", "MongoDB", "React Native", "Django", "PostgreSQL"]
+    stack: ["Node.js", "AdonisJS", "MongoDB", "React Native", "Django", "PostgreSQL"],
+    link: "https://mubai.com.mx/"
   },
   {
     company: "Altatec de Occidente",
@@ -53,15 +61,17 @@ const experience = [
     period: "Sept. 2017 - Jul. 2019",
     location: "Zapopan, Jalisco",
     description: "Diseño y desarrollo de APIs RESTful utilizando Laravel (PHP) y Node.js. Implementación de interfaces con AngularJS.",
-    stack: ["Laravel", "PHP", "Node.js", "JavaScript", "AngularJS"]
+    stack: ["Laravel", "PHP", "Node.js", "JavaScript", "AngularJS"],
+    link: "https://altatec.com.mx/mx/category/software/"
   },
   {
-    company: "Emergys Corporation",
+    company: "Emergys Corporation México",
     role: "Developer Junior",
     period: "Ene. 2017 - May. 2017",
-    location: "Guadalajara, Jalisco",
+    location: "Zapopan, Jalisco",
     description: "Participación en el programa de desarrollo Emergys. Desarrollo web, pruebas de software (testing), aplicaciones Android y trabajo con IBM Integration Bus y Spring Java.",
-    stack: ["IBM Integration Bus", "Java", "Spring", "Android", "Testing"]
+    stack: ["IBM Integration Bus", "Java", "Spring", "Android", "Testing"],
+    link: "https://emergys.com.mx/"
   },
   {
     company: "Recab de México",
@@ -69,7 +79,8 @@ const experience = [
     period: "Sept. 2016 - Mar. 2017",
     location: "Guadalajara, Jalisco",
     description: "Desarrollo inicial de sitios y aplicaciones web internas en jornada parcial.",
-    stack: ["HTML", "CSS", "PHP", "Web Development"]
+    stack: ["HTML", "CSS", "PHP", "Web Development"],
+    link: "https://recab.com.mx/"
   },
   {
     company: "Recab de México",
@@ -77,7 +88,8 @@ const experience = [
     period: "Ago. 2015 - Ago. 2016",
     location: "México",
     description: "Administración de servidores, soporte técnico preventivo/correctivo y gestión de infraestructura. Supervisión de telefonía IP, seguridad (antivirus) y administración de redes e IPs.",
-    stack: ["Servidores", "Telefonía IP", "Redes", "Soporte Técnico", "Seguridad"]
+    stack: ["Servidores", "Telefonía IP", "Redes", "Soporte Técnico", "Seguridad"],
+    link: "https://recab.com.mx/"
   },
   {
     company: "Instituciones Hermosa Provincia",
@@ -85,14 +97,15 @@ const experience = [
     period: "Ene. 2013 - Jul. 2016",
     location: "Guadalajara, Jalisco",
     description: "Actividades académicas y de enseñanza técnica en instituciones educativas.",
-    stack: ["Educación", "Liderazgo", "Comunicación"]
+    stack: ["Educación", "Liderazgo", "Comunicación"],
+    link: "https://hermosaprovincia.com/"
   }
 ];
 
 const skills = [
-  { category: "Frontend", icon: <Monitor className="w-6 h-6" />, items: ["React", "Angular", "Vue.js", "AngularJS", "Tailwind CSS", "Bootstrap", "JavaScript"] },
-  { category: "Backend", icon: <Server className="w-6 h-6" />, items: ["Node.js", "Laravel", "AdonisJS", "Django", "Spring Java", "PHP", "Python"] },
-  { category: "Database & ORM", icon: <Database className="w-6 h-6" />, items: ["MySQL", "PostgreSQL", "MongoDB", "Sequelize", "Lucid ORM"] },
+  { category: "Frontend", icon: <DesktopWindows className="w-6 h-6" />, items: ["React", "Angular", "Vue.js", "AngularJS", "Tailwind CSS", "Bootstrap", "JavaScript"] },
+  { category: "Backend", icon: <Storage className="w-6 h-6" />, items: ["Node.js", "Laravel", "AdonisJS", "Django", "Spring Java", "PHP", "Python"] },
+  { category: "Database & ORM", icon: <Dns className="w-6 h-6" />, items: ["MySQL", "PostgreSQL", "MongoDB", "Sequelize", "Lucid ORM"] },
   { category: "Infra & Cloud", icon: <Cloud className="w-6 h-6" />, items: ["AWS (EC2, LightSail)", "Ubuntu/Linux", "Apache", "IBM Integration Bus", "Git"] },
 ];
 
@@ -188,11 +201,28 @@ export default function App() {
           </div>
           <div className="flex items-center gap-4">
             <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-slate-700/50 transition-colors">
-              {darkMode ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-600" />}
+              {darkMode ? <LightMode className="w-5 h-5 text-yellow-400" /> : <DarkMode className="w-5 h-5 text-slate-600" />}
             </button>
-            <a href={personalInfo.social.linkedin} target="_blank" rel="noreferrer" className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20">
-              LinkedIn
-            </a>
+            <div className="flex items-center gap-2">
+              <a href={personalInfo.social.github} target="_blank" rel="noreferrer" className="p-2 rounded-lg hover:bg-slate-700/30 transition-all hover:scale-110" title="GitHub">
+                <GitHub className={`w-5 h-5 ${darkMode ? 'text-white' : 'text-slate-900'}`} />
+              </a>
+              <a href={personalInfo.social.linkedin} target="_blank" rel="noreferrer" className="p-2 rounded-lg hover:bg-[#0A66C2]/10 transition-all hover:scale-110" title="LinkedIn">
+                <LinkedIn className="w-5 h-5 text-[#0A66C2]" />
+              </a>
+              <a href={personalInfo.social.twitter} target="_blank" rel="noreferrer" className="p-2 rounded-lg hover:bg-slate-700/30 transition-all hover:scale-110" title="X (Twitter)">
+                <XIcon className={`w-5 h-5 ${darkMode ? 'text-white' : 'text-black'}`} />
+              </a>
+              <a href={personalInfo.social.whatsapp} target="_blank" rel="noreferrer" className="p-2 rounded-lg hover:bg-[#25D366]/10 transition-all hover:scale-110" title="WhatsApp">
+                <WhatsApp className="w-5 h-5 text-[#25D366]" />
+              </a>
+              <a href={personalInfo.social.facebook} target="_blank" rel="noreferrer" className="p-2 rounded-lg hover:bg-[#1877F2]/10 transition-all hover:scale-110" title="Facebook">
+                <Facebook className="w-5 h-5 text-[#1877F2]" />
+              </a>
+              <a href={personalInfo.social.instagram} target="_blank" rel="noreferrer" className="p-2 rounded-lg hover:bg-[#E4405F]/10 transition-all hover:scale-110" title="Instagram">
+                <Instagram className="w-5 h-5 text-[#E4405F]" />
+              </a>
+            </div>
           </div>
         </div>
       </nav>
@@ -207,10 +237,10 @@ export default function App() {
                 <img
                   src={avatarUrl}
                   alt={personalInfo.name}
-                  className="relative w-32 h-32 rounded-full border-4 border-slate-800 object-cover mx-auto shadow-2xl"
+                  className="relative w-50 h-50 rounded-full border-4 border-slate-800 object-cover mx-auto shadow-2xl"
                 />
               ) : (
-                <div className="relative w-32 h-32 rounded-full border-4 border-slate-800 bg-slate-700 animate-pulse mx-auto shadow-2xl flex items-center justify-center">
+                <div className="relative w-50 h-50 rounded-full border-4 border-slate-800 bg-slate-700 animate-pulse mx-auto shadow-2xl flex items-center justify-center">
                   <Settings className="w-12 h-12 text-slate-500 animate-spin" />
                 </div>
               )}
@@ -228,7 +258,7 @@ export default function App() {
             </p>
             <div className="flex justify-center gap-4">
               <button onClick={() => scrollTo('experiencia')} className="px-8 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-all flex items-center gap-2">
-                Ver Trayectoria <ChevronDown className="w-4 h-4" />
+                Ver Trayectoria <ExpandMore className="w-4 h-4" />
               </button>
               <button onClick={() => scrollTo('contacto')} className={`px-8 py-3 border font-bold rounded-xl transition-all ${darkMode ? 'border-slate-700 hover:bg-slate-800' : 'border-gray-200 hover:bg-gray-50'}`}>
                 Contacto
@@ -279,14 +309,17 @@ export default function App() {
                   <div className="md:w-1/2 flex flex-col items-start md:items-end">
                     {i % 2 === 0 ? (
                       <div className="hidden md:block text-right">
-                        {/* <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>
-                        <h4 className="text-sm text-slate-500">{exp.location}</h4> */}
+                        {/* <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>*/}
+                        <h4 className="text-sm text-slate-500">{exp.location}</h4>
                       </div>
                     ) : (
                       <div className="p-6 rounded-3xl border w-full bg-slate-900/50 dark:bg-slate-800/40 border-slate-700/50">
                         <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>
                         <h3 className="text-xl font-black mt-2">{exp.role}</h3>
-                        <h4 className="text-teal-400 font-bold mb-3">{exp.company}</h4>
+                        <a href={exp.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-teal-400 font-bold mb-3 hover:text-teal-300 transition-colors group">
+                          {exp.company}
+                          <OpenInNew className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </a>
                         <p className={`text-sm leading-relaxed ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>{exp.description}</p>
                         <div className="flex flex-wrap gap-2 mt-4">
                           {exp.stack.map((t, idx) => <span key={idx} className="text-[10px] uppercase font-bold text-slate-500 tracking-tighter">#{t}</span>)}
@@ -298,14 +331,17 @@ export default function App() {
                   <div className="md:w-1/2 flex flex-col items-start">
                     {i % 2 !== 0 ? (
                       <div className="hidden md:block text-left">
-                        {/* <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>
-                        <h4 className="text-sm text-slate-500">{exp.location}</h4> */}
+                        {/* <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>*/}
+                        <h4 className="text-sm text-slate-500">{exp.location}</h4>
                       </div>
                     ) : (
                       <div className="p-6 rounded-3xl border w-full bg-slate-900/50 dark:bg-slate-800/40 border-slate-700/50">
                         <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>
                         <h3 className="text-xl font-black mt-2">{exp.role}</h3>
-                        <h4 className="text-teal-400 font-bold mb-3">{exp.company}</h4>
+                        <a href={exp.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-teal-400 font-bold mb-3 hover:text-teal-300 transition-colors group">
+                          {exp.company}
+                          <OpenInNew className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </a>
                         <p className={`text-sm leading-relaxed ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>{exp.description}</p>
                         <div className="flex flex-wrap gap-2 mt-4">
                           {exp.stack.map((t, idx) => <span key={idx} className="text-[10px] uppercase font-bold text-slate-500 tracking-tighter">#{t}</span>)}
@@ -335,10 +371,10 @@ export default function App() {
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <a href={personalInfo.social.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-8 py-4 bg-blue-600 rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-xl shadow-blue-900/40">
-                <Linkedin className="w-5 h-5" /> Mi Perfil Profesional
+                <LinkedIn className="w-5 h-5" /> Mi Perfil Profesional
               </a>
               <a href={personalInfo.social.email} className={`flex items-center gap-3 px-8 py-4 border rounded-2xl font-bold transition-all ${darkMode ? 'border-slate-700 hover:bg-slate-800' : 'border-gray-200 hover:bg-white'}`}>
-                <Mail className="w-5 h-5" /> Enviar Mensaje
+                <Email className="w-5 h-5" /> Enviar Mensaje
               </a>
             </div>
           </FadeIn>
