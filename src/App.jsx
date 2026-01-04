@@ -11,8 +11,8 @@ const personalInfo = {
     linkedin: "https://www.linkedin.com/in/ingmario/",
     email: "mailto:ing_mariomcs@outlook.com",
     github: "https://github.com/mariotip",
-    facebook: "https://www.facebook.com/ingmario/",
-    instagram: "https://www.instagram.com/ingmario/",
+    facebook: "https://www.facebook.com/tachimen/",
+    instagram: "https://www.instagram.com/mario.tip/",
     twitter: "https://x.com/mario_Tip",
     whatsapp: "https://wa.me/3312182604"
   }
@@ -21,7 +21,7 @@ const personalInfo = {
 const experience = [
   {
     company: "Garantia",
-    role: "Senior Software Architect",
+    role: "Software Engineer",
     period: "Mar. 2022 - Actualidad",
     location: "Zapopan, Jalisco",
     description: "Liderazgo técnico en el diseño de ecosistemas digitales complejos. Orquestación de arquitecturas desacopladas con React y Angular bajo infraestructuras resilientes en AWS utilizando Node.js y Sequelize para la gestión de datos escalables.",
@@ -39,7 +39,7 @@ const experience = [
   },
   {
     company: "Metapack",
-    role: "Software Architect",
+    role: "Software Engineer",
     period: "Feb. 2020 - Abr. 2021",
     location: "Guadalajara, México",
     description: "Ingeniería de software enfocada en la creación de APIs industriales robustas y altamente escalables. Estandarización de componentes modulares en Angular y optimización de entornos de servidor Linux para garantizar la disponibilidad continua.",
@@ -57,7 +57,7 @@ const experience = [
   },
   {
     company: "Altatec de Occidente",
-    role: "Senior Backend Developer",
+    role: "Backend Developer",
     period: "Sept. 2017 - Jul. 2019",
     location: "Zapopan, Jalisco",
     description: "Arquitectura y desarrollo de APIs RESTful de alto desempeño mediante el ecosistema Laravel y Node.js. Enfoque en la eficiencia transaccional e implementación de interfaces reactivas para la gestión de datos empresariales.",
