@@ -21,7 +21,7 @@ const personalInfo = {
 const experience = [
   {
     company: "Garantia",
-    role: "Software Engineer",
+    role: "Software Developer & Solutions Engineer",
     period: "Mar. 2022 - Actualidad",
     location: "Zapopan, Jalisco",
     description: "Liderazgo técnico en el diseño de ecosistemas digitales complejos. Orquestación de arquitecturas desacopladas con React y Angular bajo infraestructuras resilientes en AWS utilizando Node.js y Sequelize para la gestión de datos escalables.",
@@ -74,31 +74,31 @@ const experience = [
     link: "https://emergys.com.mx/"
   },
   {
-    company: "Recab de México",
+    company: "IEHP",
     role: "Systems Developer",
     period: "Sept. 2016 - Mar. 2017",
     location: "Guadalajara, Jalisco",
     description: "Ingeniería y mantenimiento de sistemas internos críticos, garantizando la estabilidad operativa y la funcionalidad de plataformas industriales de gestión web.",
     stack: ["HTML", "CSS", "PHP", "Web Development"],
-    link: "https://recab.com.mx/"
+    link: "https://iehp.edu.mx/"
   },
   {
-    company: "Recab de México",
+    company: "IEHP",
     role: "Infrastructure Manager",
     period: "Ago. 2015 - Ago. 2016",
     location: "México",
     description: "Gestión integral de infraestructura crítica, administración de redes corporativas y servidores. Supervisión del ecosistema de seguridad y aseguramiento de la continuidad operativa institucional.",
     stack: ["Servidores", "Telefonía IP", "Redes", "Soporte Técnico", "Seguridad"],
-    link: "https://recab.com.mx/"
+    link: "https://iehp.edu.mx/"
   },
   {
-    company: "Instituciones Hermosa Provincia",
+    company: "IEHP",
     role: "Technological Education Consultant",
     period: "Ene. 2013 - Jul. 2016",
     location: "Guadalajara, Jalisco",
     description: "Consultoría académica y liderazgo en programas de formación tecnológica, gestionando la transferencia de conocimiento técnico especializado en entornos educativos profesionales.",
     stack: ["Educación", "Liderazgo", "Comunicación"],
-    link: "https://hermosaprovincia.com/"
+    link: "https://iehp.edu.mx/"
   }
 ];
 
