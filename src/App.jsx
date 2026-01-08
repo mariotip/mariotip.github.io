@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { GitHub, LinkedIn, Email, ExpandMore, Storage, Dns, Cloud, Terminal, OpenInNew, DarkMode, LightMode, DesktopWindows, Memory, Work, MenuBook, Settings, Facebook, Instagram, WhatsApp } from '@mui/icons-material';
+import { GitHub, LinkedIn, Email, ExpandMore, Storage, Dns, Cloud, Terminal, OpenInNew, DarkMode, LightMode, DesktopWindows, Settings, Facebook, Instagram, WhatsApp } from '@mui/icons-material';
 import XIcon from '@mui/icons-material/X';
 // --- Datos actualizados con la trayectoria completa ---
 const personalInfo = {
@@ -103,10 +103,10 @@ const experience = [
 ];
 
 const skills = [
-  { category: "Frontend Engineering", icon: <DesktopWindows className="w-6 h-6" />, items: ["React", "Angular", "Vue.js", "AngularJS", "Tailwind CSS", "Bootstrap", "JavaScript"] },
-  { category: "Cloud & Backend Architecture", icon: <Storage className="w-6 h-6" />, items: ["Node.js", "Laravel", "AdonisJS", "Django", "Spring Java", "PHP", "Python"] },
+  { category: "Frontend Engineering", icon: <DesktopWindows className="w-6 h-6" />, items: ["React", "Angular", "Vue", "Mui Material", "Bootstrap", "JavaScript"] },
+  { category: "Cloud & Backend Architecture", icon: <Storage className="w-6 h-6" />, items: ["Node", "Laravel", "Adonis", "Django", "PHP", "Python"] },
   { category: "Data Management & ORM", icon: <Dns className="w-6 h-6" />, items: ["MySQL", "PostgreSQL", "MongoDB", "Sequelize", "Lucid ORM"] },
-  { category: "Critical Infrastructure", icon: <Cloud className="w-6 h-6" />, items: ["AWS (EC2, LightSail)", "Ubuntu/Linux", "Apache", "IBM Integration Bus", "Git"] },
+  { category: "Critical Infrastructure", icon: <Cloud className="w-6 h-6" />, items: ["AWS (EC2, LightSail, S3, RDS)", "Ubuntu/Linux", "Git"] },
 ];
 
 // --- Componentes UI ---
@@ -233,7 +233,7 @@ export default function App() {
             <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-slate-700/50 transition-colors">
               {darkMode ? <LightMode className="w-5 h-5 text-yellow-400" /> : <DarkMode className="w-5 h-5 text-slate-600" />}
             </button>
-            <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide whitespace-nowrap max-w-[140px] xs:max-w-[180px] sm:max-w-none px-2">
+            <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide whitespace-nowrap max-w-[140px] xs:max-w-[180px] sm:max-w-none px-2 overflow-y-hidden">
               <a href={personalInfo.social.github} target="_blank" rel="noreferrer" className="p-2 rounded-lg hover:bg-slate-700/30 transition-all hover:scale-110 shrink-0" title="GitHub">
                 <GitHub className={`w-5 h-5 ${darkMode ? 'text-white' : 'text-slate-900'}`} />
               </a>
