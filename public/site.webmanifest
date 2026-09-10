@@ -1,0 +1,16 @@
+{
+  "name": "Mario De La Cruz Sandoval - Portafolio Profesional",
+  "short_name": "Mario Dev",
+  "description": "Senior Software Architect & Solutions Engineer especializado en arquitecturas de software escalables y soluciones cloud empresariales.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

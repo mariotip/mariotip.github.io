@@ -211,92 +211,179 @@ export default function App() {
   return (
     <div className={`min-h-screen transition-colors duration-300 font-sans ${darkMode ? 'bg-slate-900 text-slate-100' : 'bg-white text-gray-800'}`}>
 
-      {/* Navbar */}
-      <nav className={`fixed top-0 w-full z-50 backdrop-blur-md transition-colors duration-300 ${darkMode ? 'bg-slate-900/80 border-b border-slate-800' : 'bg-white/80 border-b border-gray-200'}`}>
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="font-bold text-xl cursor-pointer" onClick={() => scrollTo('home')}>
-            <Terminal className="w-5 h-5 mr-1 align-center" />
-            <span className="text-blue-500">M</span>ario<span className="text-teal-400">.dev</span>
-          </div>
-          <div className="hidden md:flex space-x-8">
-            {['Habilidades', 'Experiencia', 'Contacto'].map((item) => (
+      {/* Header & Navbar */}
+      <header>
+        <nav className={`fixed top-0 w-full z-50 backdrop-blur-md transition-colors duration-300 ${darkMode ? 'bg-slate-900/80 border-b border-slate-800' : 'bg-white/80 border-b border-gray-200'}`} aria-label="Navegación principal">
+          <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a
+              href="#home"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollTo('home');
+              }}
+              className="font-bold text-xl inline-flex items-center cursor-pointer"
+              aria-label="Mario De La Cruz Sandoval - Inicio"
+            >
+              <Terminal className="w-5 h-5 mr-1 align-center" />
+              <span className="text-blue-500">M</span>ario<span className="text-teal-400">.dev</span>
+            </a>
+            <div className="hidden md:flex space-x-8">
+              {[
+                { name: 'Habilidades', id: 'habilidades' },
+                { name: 'Experiencia', id: 'experiencia' },
+                { name: 'Contacto', id: 'contacto' }
+              ].map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollTo(item.id);
+                  }}
+                  className={`text-sm font-medium hover:text-blue-400 transition-colors ${activeSection === item.id ? 'text-blue-400' : ''}`}
+                >
+                  {item.name}
+                </a>
+              ))}
+            </div>
+            <div className="flex items-center gap-4">
               <button
-                key={item}
-                onClick={() => scrollTo(item.toLowerCase())}
-                className={`text-sm font-medium hover:text-blue-400 transition-colors ${activeSection === item.toLowerCase() ? 'text-blue-400' : ''}`}
+                onClick={toggleTheme}
+                className="p-2 rounded-full hover:bg-slate-700/50 transition-colors"
+                aria-label={darkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
               >
-                {item}
+                {darkMode ? <LightMode className="w-5 h-5 text-yellow-400" /> : <DarkMode className="w-5 h-5 text-slate-600" />}
               </button>
-            ))}
-          </div>
-          <div className="flex items-center gap-4">
-            <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-slate-700/50 transition-colors">
-              {darkMode ? <LightMode className="w-5 h-5 text-yellow-400" /> : <DarkMode className="w-5 h-5 text-slate-600" />}
-            </button>
-            <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide whitespace-nowrap max-w-[140px] xs:max-w-[180px] sm:max-w-none px-2 overflow-y-hidden">
-              <a href={personalInfo.social.github} target="_blank" rel="noreferrer" className="p-2 rounded-lg hover:bg-slate-700/30 transition-all hover:scale-110 shrink-0" title="GitHub">
-                <GitHub className={`w-5 h-5 ${darkMode ? 'text-white' : 'text-slate-900'}`} />
-              </a>
-              <a href={personalInfo.social.linkedin} target="_blank" rel="noreferrer" className="p-2 rounded-lg hover:bg-[#0A66C2]/10 transition-all hover:scale-110 shrink-0" title="LinkedIn">
-                <LinkedIn className="w-5 h-5 text-[#0A66C2]" />
-              </a>
-              <a href={personalInfo.social.twitter} target="_blank" rel="noreferrer" className="p-2 rounded-lg hover:bg-slate-700/30 transition-all hover:scale-110 shrink-0" title="X (Twitter)">
-                <XIcon className={`w-5 h-5 ${darkMode ? 'text-white' : 'text-black'}`} />
-              </a>
-              <a href={personalInfo.social.whatsapp} target="_blank" rel="noreferrer" className="p-2 rounded-lg hover:bg-[#25D366]/10 transition-all hover:scale-110 shrink-0" title="WhatsApp">
-                <WhatsApp className="w-5 h-5 text-[#25D366]" />
-              </a>
-              <a href={personalInfo.social.facebook} target="_blank" rel="noreferrer" className="p-2 rounded-lg hover:bg-[#1877F2]/10 transition-all hover:scale-110 shrink-0" title="Facebook">
-                <Facebook className="w-5 h-5 text-[#1877F2]" />
-              </a>
-              <a href={personalInfo.social.instagram} target="_blank" rel="noreferrer" className="p-2 rounded-lg hover:bg-[#E4405F]/10 transition-all hover:scale-110 shrink-0" title="Instagram">
-                <Instagram className="w-5 h-5 text-[#E4405F]" />
-              </a>
+              <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide whitespace-nowrap max-w-[140px] xs:max-w-[180px] sm:max-w-none px-2 overflow-y-hidden">
+                <a
+                  href={personalInfo.social.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-2 rounded-lg hover:bg-slate-700/30 transition-all hover:scale-110 shrink-0"
+                  title="GitHub"
+                  aria-label="Perfil de GitHub de Mario De La Cruz Sandoval"
+                >
+                  <GitHub className={`w-5 h-5 ${darkMode ? 'text-white' : 'text-slate-900'}`} />
+                </a>
+                <a
+                  href={personalInfo.social.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-2 rounded-lg hover:bg-[#0A66C2]/10 transition-all hover:scale-110 shrink-0"
+                  title="LinkedIn"
+                  aria-label="Perfil de LinkedIn de Mario De La Cruz Sandoval"
+                >
+                  <LinkedIn className="w-5 h-5 text-[#0A66C2]" />
+                </a>
+                <a
+                  href={personalInfo.social.twitter}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-2 rounded-lg hover:bg-slate-700/30 transition-all hover:scale-110 shrink-0"
+                  title="X (Twitter)"
+                  aria-label="Perfil de X (Twitter) de Mario De La Cruz Sandoval"
+                >
+                  <XIcon className={`w-5 h-5 ${darkMode ? 'text-white' : 'text-black'}`} />
+                </a>
+                <a
+                  href={personalInfo.social.whatsapp}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-2 rounded-lg hover:bg-[#25D366]/10 transition-all hover:scale-110 shrink-0"
+                  title="WhatsApp"
+                  aria-label="Contactar por WhatsApp a Mario De La Cruz Sandoval"
+                >
+                  <WhatsApp className="w-5 h-5 text-[#25D366]" />
+                </a>
+                <a
+                  href={personalInfo.social.facebook}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-2 rounded-lg hover:bg-[#1877F2]/10 transition-all hover:scale-110 shrink-0"
+                  title="Facebook"
+                  aria-label="Perfil de Facebook de Mario De La Cruz Sandoval"
+                >
+                  <Facebook className="w-5 h-5 text-[#1877F2]" />
+                </a>
+                <a
+                  href={personalInfo.social.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-2 rounded-lg hover:bg-[#E4405F]/10 transition-all hover:scale-110 shrink-0"
+                  title="Instagram"
+                  aria-label="Perfil de Instagram de Mario De La Cruz Sandoval"
+                >
+                  <Instagram className="w-5 h-5 text-[#E4405F]" />
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </header>
 
-      {/* Hero */}
-      <section id="home" className="min-h-screen flex items-center justify-center relative pt-20">
-        <div className="text-center px-6 max-w-4xl">
-          <FadeIn>
-            <div className="mb-6 relative inline-block">
-              <div className="absolute inset-0 bg-blue-500 blur-xl opacity-20 rounded-full"></div>
-              {avatarUrl ? (
-                <img
-                  src={avatarUrl}
-                  alt={personalInfo.name}
-                  className="relative w-50 h-50 rounded-full border-4 border-slate-800 object-cover mx-auto shadow-2xl"
-                />
-              ) : (
-                <div className="relative w-50 h-50 rounded-full border-4 border-slate-800 bg-slate-700 animate-pulse mx-auto shadow-2xl flex items-center justify-center">
-                  <Settings className="w-12 h-12 text-slate-500 animate-spin" />
-                </div>
-              )}
-            </div>
-            <div className="block"></div>
-            <div className="inline-block px-4 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold mb-6 uppercase tracking-[0.2em]">
-              Soluciones Tecnológicas Empresariales
-            </div>
-            <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
-              Escalando Negocios mediante <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-400">Software de Clase Mundial</span>
-            </h1>
-            <p className={`text-lg md:text-xl mb-10 leading-relaxed ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>
-              {personalInfo.summary}
-            </p>
-            <div className="flex justify-center gap-4">
-              <button onClick={() => scrollTo('experiencia')} className="px-8 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-all flex items-center gap-2">
-                Ver Trayectoria <ExpandMore className="w-4 h-4" />
-              </button>
-              <button onClick={() => scrollTo('contacto')} className={`px-8 py-3 border font-bold rounded-xl transition-all ${darkMode ? 'border-slate-700 hover:bg-slate-800' : 'border-gray-200 hover:bg-gray-50'}`}>
-                Contacto
-              </button>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      {/* Main Content */}
+      <main id="main-content">
+        {/* Hero */}
+        <section id="home" className="min-h-screen flex items-center justify-center relative pt-20">
+          <div className="text-center px-6 max-w-4xl">
+            <FadeIn>
+              <div className="mb-6 relative inline-block">
+                <div className="absolute inset-0 bg-blue-500 blur-xl opacity-20 rounded-full"></div>
+                {avatarUrl ? (
+                  <img
+                    src={avatarUrl}
+                    alt={personalInfo.name}
+                    width="200"
+                    height="200"
+                    loading="eager"
+                    fetchPriority="high"
+                    className="relative w-50 h-50 rounded-full border-4 border-slate-800 object-cover mx-auto shadow-2xl"
+                  />
+                ) : (
+                  <div className="relative w-50 h-50 rounded-full border-4 border-slate-800 bg-slate-700 animate-pulse mx-auto shadow-2xl flex items-center justify-center">
+                    <Settings className="w-12 h-12 text-slate-500 animate-spin" />
+                  </div>
+                )}
+              </div>
+              <div className="block"></div>
+              <div className="inline-block px-4 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold mb-4 uppercase tracking-[0.2em]">
+                {personalInfo.title}
+              </div>
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 leading-tight">
+                <span className="block text-2xl sm:text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400 font-bold mb-2">
+                  {personalInfo.name}
+                </span>
+                Escalando Negocios mediante <br />
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-400">Software de Clase Mundial</span>
+              </h1>
+              <p className={`text-lg md:text-xl mb-10 leading-relaxed ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>
+                {personalInfo.summary}
+              </p>
+              <div className="flex justify-center gap-4">
+                <a
+                  href="#experiencia"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollTo('experiencia');
+                  }}
+                  className="px-8 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-all flex items-center gap-2"
+                >
+                  Ver Trayectoria <ExpandMore className="w-4 h-4" />
+                </a>
+                <a
+                  href="#contacto"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollTo('contacto');
+                  }}
+                  className={`px-8 py-3 border font-bold rounded-xl transition-all ${darkMode ? 'border-slate-700 hover:bg-slate-800' : 'border-gray-200 hover:bg-gray-50'}`}
+                >
+                  Contacto
+                </a>
+              </div>
+            </FadeIn>
+          </div>
+        </section>
 
       {/* Skills */}
       <section id="habilidades" className={`py-24 ${darkMode ? 'bg-slate-800/20' : 'bg-slate-50'}`}>
@@ -410,6 +497,7 @@ export default function App() {
           </FadeIn>
         </div>
       </section>
+      </main>
 
       {/* Footer */}
       <footer className="py-12 border-t border-slate-800 text-center opacity-60 text-sm">
