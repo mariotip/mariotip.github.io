@@ -5,7 +5,7 @@ import XIcon from '@mui/icons-material/X';
 // --- Datos actualizados con la trayectoria completa ---
 const personalInfo = {
   name: "Mario De La Cruz Sandoval",
-  title: "Senior Software Architect & Solutions Engineer",
+  title: "Software Architect & Solutions Engineer",
   summary: "Especialista en el diseño y ejecución de soluciones tecnológicas empresariales con más de 8 años impulsando el crecimiento de negocios. Experto en transformar necesidades corporativas en arquitecturas escalables de alta disponibilidad, optimizando infraestructuras y garantizando la integridad de sistemas de misión crítica.",
   social: {
     linkedin: "https://www.linkedin.com/in/ingmario/",
