@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { GitHub, LinkedIn, Email, ExpandMore, Storage, Dns, Cloud, Terminal, OpenInNew, DarkMode, LightMode, DesktopWindows, Settings, Facebook, Instagram, WhatsApp } from '@mui/icons-material';
+import { GitHub, LinkedIn, Email, ExpandMore, Storage, Dns, Cloud, Terminal, OpenInNew, DarkMode, LightMode, DesktopWindows, Settings, Facebook, Instagram, WhatsApp, People } from '@mui/icons-material';
 import XIcon from '@mui/icons-material/X';
 // --- Datos actualizados con la trayectoria completa ---
 const personalInfo = {
@@ -20,7 +20,7 @@ const personalInfo = {
 
 const experience = [
   {
-    company: "Garantia",
+    company: "Garantía",
     role: "Software Developer & Solutions Engineer",
     period: "Mar. 2022 - Actualidad",
     location: "Zapopan, Jalisco",
@@ -33,7 +33,7 @@ const experience = [
     role: "Solutions Engineer",
     period: "Nov. 2020 - Jul. 2022",
     location: "Zapopan, Jalisco",
-    description: "Ingeniería de soluciones Fullstack optimizadas para el rendimiento y la agilidad de procesos internos. Desarrollo de arquitecturas modulares con Vue.js y Laravel, simplificando despliegues críticos mediante servicios cloud de AWS.",
+    description: "Ingeniería de soluciones Full Stack optimizadas para el rendimiento y la agilidad de procesos internos. Desarrollo de arquitecturas modulares con Vue.js y Laravel, simplificando despliegues críticos mediante servicios cloud de AWS.",
     stack: ["Vue.js", "Laravel", "AWS LightSail", "PHP", "MySQL"],
     link: "https://turn.com.mx/"
   },
@@ -104,9 +104,10 @@ const experience = [
 
 const skills = [
   { category: "Frontend Engineering", icon: <DesktopWindows className="w-6 h-6" />, items: ["React", "Angular", "Vue", "Mui Material", "Bootstrap", "JavaScript"] },
-  { category: "Cloud & Backend Architecture", icon: <Storage className="w-6 h-6" />, items: ["Node", "Laravel", "Adonis", "Django", "PHP", "Python"] },
-  { category: "Data Management & ORM", icon: <Dns className="w-6 h-6" />, items: ["MySQL", "PostgreSQL", "MongoDB", "Sequelize", "Lucid ORM"] },
+  { category: "Cloud & Backend Architecture", icon: <Storage className="w-6 h-6" />, items: ["Node", "Laravel", "Adonis", "Django"] },
+  { category: "Data Management & ORM", icon: <Dns className="w-6 h-6" />, items: ["MySQL", "MongoDB", "Sequelize", "Lucid ORM"] },
   { category: "Critical Infrastructure", icon: <Cloud className="w-6 h-6" />, items: ["AWS (EC2, LightSail, S3, RDS)", "Ubuntu/Linux", "Git"] },
+  { category: "Soft Skills", icon: <People className="w-6 h-6" />, items: ["Scrum", "Kanban", "Comunicación", "Trabajo en equipo", "Resolución de problemas"] },
 ];
 
 // --- Componentes UI ---
@@ -385,118 +386,118 @@ export default function App() {
           </div>
         </section>
 
-      {/* Skills */}
-      <section id="habilidades" className={`py-24 ${darkMode ? 'bg-slate-800/20' : 'bg-slate-50'}`}>
-        <div className="max-w-7xl mx-auto px-6">
-          <FadeIn><SectionTitle subtitle>Stack de Especialidades</SectionTitle></FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {skills.map((s, i) => (
-              <FadeIn key={i} delay={i * 100}>
-                <div className={`p-8 rounded-3xl border h-full transition-all hover:shadow-2xl ${darkMode ? 'bg-slate-900 border-slate-700 hover:border-blue-500/30' : 'bg-white border-gray-100 hover:border-blue-200'}`}>
-                  <div className="text-blue-500 mb-4">{s.icon}</div>
-                  <h3 className="text-lg font-bold mb-4">{s.category}</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {s.items.map((item, idx) => (
-                      <span key={idx} className={`text-xs px-2 py-1 rounded ${darkMode ? 'bg-slate-800 text-slate-300' : 'bg-gray-100 text-gray-600'}`}>
-                        {item}
-                      </span>
-                    ))}
+        {/* Skills */}
+        <section id="habilidades" className={`py-24 ${darkMode ? 'bg-slate-800/20' : 'bg-slate-50'}`}>
+          <div className="max-w-7xl mx-auto px-6">
+            <FadeIn><SectionTitle subtitle>Stack de Especialidades</SectionTitle></FadeIn>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+              {skills.map((s, i) => (
+                <FadeIn key={i} delay={i * 100}>
+                  <div className={`p-8 rounded-3xl border h-full transition-all hover:shadow-2xl ${darkMode ? 'bg-slate-900 border-slate-700 hover:border-blue-500/30' : 'bg-white border-gray-100 hover:border-blue-200'}`}>
+                    <div className="text-blue-500 mb-4">{s.icon}</div>
+                    <h3 className="text-lg font-bold mb-4">{s.category}</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {s.items.map((item, idx) => (
+                        <span key={idx} className={`text-xs px-2 py-1 rounded ${darkMode ? 'bg-slate-800 text-slate-300' : 'bg-gray-100 text-gray-600'}`}>
+                          {item}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Full Experience Timeline */}
-      <section id="experiencia" className="py-24">
-        <div className="max-w-5xl mx-auto px-6">
-          <FadeIn><SectionTitle subtitle>Trayectoria Completa</SectionTitle></FadeIn>
-          <div className="relative mt-16">
-            {/* Main Line */}
-            <div className={`absolute left-0 md:left-1/2 top-0 bottom-0 w-px ${darkMode ? 'bg-slate-800' : 'bg-gray-200'} hidden md:block`}></div>
-
-            {experience.map((exp, i) => (
-              <FadeIn key={i} delay={i * 50}>
-                <div className={`relative flex flex-col md:flex-row gap-8 mb-16`}>
-                  {/* Circle Dot Desktop */}
-                  <div className="absolute left-1/2 top-0 w-3 h-3 bg-blue-500 rounded-full -translate-x-1/2 mt-2 hidden md:block"></div>
-
-                  <div className="md:w-1/2 flex flex-col items-start md:items-end">
-                    {i % 2 === 0 ? (
-                      <div className="hidden md:block text-right">
-                        {/* <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>*/}
-                        <h4 className="text-sm text-slate-500">{exp.location}</h4>
-                      </div>
-                    ) : (
-                      <div className="p-6 rounded-3xl border w-full bg-slate-900/50 dark:bg-slate-800/40 border-slate-700/50">
-                        <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>
-                        <h3 className="text-xl font-black mt-2">{exp.role}</h3>
-                        <a href={exp.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-teal-400 font-bold mb-3 hover:text-teal-300 transition-colors group">
-                          {exp.company}
-                          <OpenInNew className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </a>
-                        <p className={`text-sm leading-relaxed ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>{exp.description}</p>
-                        <div className="flex flex-wrap gap-2 mt-4">
-                          {exp.stack.map((t, idx) => <span key={idx} className="text-[10px] uppercase font-bold text-slate-500 tracking-tighter">#{t}</span>)}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="md:w-1/2 flex flex-col items-start">
-                    {i % 2 !== 0 ? (
-                      <div className="hidden md:block text-left">
-                        {/* <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>*/}
-                        <h4 className="text-sm text-slate-500">{exp.location}</h4>
-                      </div>
-                    ) : (
-                      <div className="p-6 rounded-3xl border w-full bg-slate-900/50 dark:bg-slate-800/40 border-slate-700/50">
-                        <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>
-                        <h3 className="text-xl font-black mt-2">{exp.role}</h3>
-                        <a href={exp.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-teal-400 font-bold mb-3 hover:text-teal-300 transition-colors group">
-                          {exp.company}
-                          <OpenInNew className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </a>
-                        <p className={`text-sm leading-relaxed ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>{exp.description}</p>
-                        <div className="flex flex-wrap gap-2 mt-4">
-                          {exp.stack.map((t, idx) => <span key={idx} className="text-[10px] uppercase font-bold text-slate-500 tracking-tighter">#{t}</span>)}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Mobile Date Overlay */}
-                  <div className="md:hidden order-first">
-                    <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section id="contacto" className={`py-24 ${darkMode ? 'bg-blue-600/10' : 'bg-blue-50'}`}>
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <FadeIn>
-            <h2 className="text-4xl font-black mb-8">Hablemos de tu próximo proyecto</h2>
-            <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
-              Especialista en convertir desafíos tecnológicos complejos en soluciones digitales escalables. Estoy disponible para liderar la evolución técnica de su organización.
-            </p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <a href={personalInfo.social.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-8 py-4 bg-blue-600 rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-xl shadow-blue-900/40">
-                <LinkedIn className="w-5 h-5" /> Mi Perfil Profesional
-              </a>
-              <a href={personalInfo.social.email} className={`flex items-center gap-3 px-8 py-4 border rounded-2xl font-bold transition-all ${darkMode ? 'border-slate-700 hover:bg-slate-800' : 'border-gray-200 hover:bg-white'}`}>
-                <Email className="w-5 h-5" /> Enviar Mensaje
-              </a>
+                </FadeIn>
+              ))}
             </div>
-          </FadeIn>
-        </div>
-      </section>
+          </div>
+        </section>
+
+        {/* Full Experience Timeline */}
+        <section id="experiencia" className="py-24">
+          <div className="max-w-5xl mx-auto px-6">
+            <FadeIn><SectionTitle subtitle>Trayectoria Completa</SectionTitle></FadeIn>
+            <div className="relative mt-16">
+              {/* Main Line */}
+              <div className={`absolute left-0 md:left-1/2 top-0 bottom-0 w-px ${darkMode ? 'bg-slate-800' : 'bg-gray-200'} hidden md:block`}></div>
+
+              {experience.map((exp, i) => (
+                <FadeIn key={i} delay={i * 50}>
+                  <div className={`relative flex flex-col md:flex-row gap-8 mb-16`}>
+                    {/* Circle Dot Desktop */}
+                    <div className="absolute left-1/2 top-0 w-3 h-3 bg-blue-500 rounded-full -translate-x-1/2 mt-2 hidden md:block"></div>
+
+                    <div className="md:w-1/2 flex flex-col items-start md:items-end">
+                      {i % 2 === 0 ? (
+                        <div className="hidden md:block text-right">
+                          {/* <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>*/}
+                          <h4 className="text-sm text-slate-500">{exp.location}</h4>
+                        </div>
+                      ) : (
+                        <div className="p-6 rounded-3xl border w-full bg-slate-900/50 dark:bg-slate-800/40 border-slate-700/50">
+                          <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>
+                          <h3 className="text-xl font-black mt-2">{exp.role}</h3>
+                          <a href={exp.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-teal-400 font-bold mb-3 hover:text-teal-300 transition-colors group">
+                            {exp.company}
+                            <OpenInNew className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </a>
+                          <p className={`text-sm leading-relaxed ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>{exp.description}</p>
+                          <div className="flex flex-wrap gap-2 mt-4">
+                            {exp.stack.map((t, idx) => <span key={idx} className="text-[10px] uppercase font-bold text-slate-500 tracking-tighter">#{t}</span>)}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="md:w-1/2 flex flex-col items-start">
+                      {i % 2 !== 0 ? (
+                        <div className="hidden md:block text-left">
+                          {/* <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>*/}
+                          <h4 className="text-sm text-slate-500">{exp.location}</h4>
+                        </div>
+                      ) : (
+                        <div className="p-6 rounded-3xl border w-full bg-slate-900/50 dark:bg-slate-800/40 border-slate-700/50">
+                          <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>
+                          <h3 className="text-xl font-black mt-2">{exp.role}</h3>
+                          <a href={exp.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-teal-400 font-bold mb-3 hover:text-teal-300 transition-colors group">
+                            {exp.company}
+                            <OpenInNew className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </a>
+                          <p className={`text-sm leading-relaxed ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>{exp.description}</p>
+                          <div className="flex flex-wrap gap-2 mt-4">
+                            {exp.stack.map((t, idx) => <span key={idx} className="text-[10px] uppercase font-bold text-slate-500 tracking-tighter">#{t}</span>)}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Mobile Date Overlay */}
+                    <div className="md:hidden order-first">
+                      <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>
+                    </div>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section id="contacto" className={`py-24 ${darkMode ? 'bg-blue-600/10' : 'bg-blue-50'}`}>
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <FadeIn>
+              <h2 className="text-4xl font-black mb-8">Hablemos de tu próximo proyecto</h2>
+              <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
+                Especialista en convertir desafíos tecnológicos complejos en soluciones digitales escalables. Estoy disponible para liderar la evolución técnica de tu organización.
+              </p>
+              <div className="flex flex-wrap justify-center gap-6">
+                <a href={personalInfo.social.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-8 py-4 bg-blue-600 rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-xl shadow-blue-900/40">
+                  <LinkedIn className="w-5 h-5" /> Mi Perfil Profesional
+                </a>
+                <a href={personalInfo.social.email} className={`flex items-center gap-3 px-8 py-4 border rounded-2xl font-bold transition-all ${darkMode ? 'border-slate-700 hover:bg-slate-800' : 'border-gray-200 hover:bg-white'}`}>
+                  <Email className="w-5 h-5" /> Enviar Mensaje
+                </a>
+              </div>
+            </FadeIn>
+          </div>
+        </section>
       </main>
 
       {/* Footer */}
