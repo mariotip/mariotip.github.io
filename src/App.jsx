@@ -5,7 +5,7 @@ import XIcon from '@mui/icons-material/X';
 // --- Datos actualizados con la trayectoria completa ---
 const personalInfo = {
   name: "Mario De La Cruz Sandoval",
-  title: "Software Architect & Solutions Engineer",
+  title: "Software Developer & Solutions Engineer",
   summary: "Especialista en el diseño y ejecución de soluciones tecnológicas empresariales con más de 8 años impulsando el crecimiento de negocios. Experto en transformar necesidades corporativas en arquitecturas escalables de alta disponibilidad, optimizando infraestructuras y garantizando la integridad de sistemas de misión crítica.",
   social: {
     linkedin: "https://www.linkedin.com/in/ingmario/",
@@ -350,13 +350,13 @@ export default function App() {
               <div className="inline-block px-4 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold mb-4 uppercase tracking-[0.2em]">
                 {personalInfo.title}
               </div>
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 leading-tight">
+              <h3 className="text-4xl sm:text-6xl md:text-6xl font-black mb-6 leading-tight">
                 <span className="block text-2xl sm:text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400 font-bold mb-2">
                   {personalInfo.name}
                 </span>
                 Escalando Negocios mediante <br />
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-400">Software de Clase Mundial</span>
-              </h1>
+              </h3>
               <p className={`text-lg md:text-xl mb-10 leading-relaxed ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>
                 {personalInfo.summary}
               </p>
@@ -431,7 +431,7 @@ export default function App() {
                           <h4 className="text-sm text-slate-500">{exp.location}</h4>
                         </div>
                       ) : (
-                        <div className="p-6 rounded-3xl border w-full bg-slate-900/50 dark:bg-slate-800/40 border-slate-700/50">
+                        <div className={`p-6 rounded-3xl border w-full transition-all hover:shadow-xl ${darkMode ? 'bg-slate-900/50 border-slate-700/50' : 'bg-white border-gray-200/80 shadow-sm'}`}>
                           <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>
                           <h3 className="text-xl font-black mt-2">{exp.role}</h3>
                           <a href={exp.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-teal-400 font-bold mb-3 hover:text-teal-300 transition-colors group">
@@ -440,7 +440,7 @@ export default function App() {
                           </a>
                           <p className={`text-sm leading-relaxed ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>{exp.description}</p>
                           <div className="flex flex-wrap gap-2 mt-4">
-                            {exp.stack.map((t, idx) => <span key={idx} className="text-[10px] uppercase font-bold text-slate-500 tracking-tighter">#{t}</span>)}
+                            {exp.stack.map((t, idx) => <span key={idx} className={`text-[10px] uppercase font-bold tracking-tighter ${darkMode ? 'text-slate-500' : 'text-slate-400'}`}>#{t}</span>)}
                           </div>
                         </div>
                       )}
@@ -453,7 +453,7 @@ export default function App() {
                           <h4 className="text-sm text-slate-500">{exp.location}</h4>
                         </div>
                       ) : (
-                        <div className="p-6 rounded-3xl border w-full bg-slate-900/50 dark:bg-slate-800/40 border-slate-700/50">
+                        <div className={`p-6 rounded-3xl border w-full transition-all hover:shadow-xl ${darkMode ? 'bg-slate-900/50 border-slate-700/50' : 'bg-white border-gray-200/80 shadow-sm'}`}>
                           <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>
                           <h3 className="text-xl font-black mt-2">{exp.role}</h3>
                           <a href={exp.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-teal-400 font-bold mb-3 hover:text-teal-300 transition-colors group">
@@ -462,7 +462,7 @@ export default function App() {
                           </a>
                           <p className={`text-sm leading-relaxed ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>{exp.description}</p>
                           <div className="flex flex-wrap gap-2 mt-4">
-                            {exp.stack.map((t, idx) => <span key={idx} className="text-[10px] uppercase font-bold text-slate-500 tracking-tighter">#{t}</span>)}
+                            {exp.stack.map((t, idx) => <span key={idx} className={`text-[10px] uppercase font-bold tracking-tighter ${darkMode ? 'text-slate-500' : 'text-slate-400'}`}>#{t}</span>)}
                           </div>
                         </div>
                       )}
