@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Curriculum Vitae - Mario De La Cruz Sandoval</title>
+  <style>
+    @page {
+      size: letter;
+      margin: 10mm 12mm 10mm 12mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #1e293b;
+      background-color: #ffffff;
+      line-height: 1.38;
+      font-size: 8.8pt;
+    }
+
+    a {
+      color: #0284c7;
+      text-decoration: none;
+    }
+
+    /* HEADER */
+    .header {
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 8px;
+      margin-bottom: 9px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .name {
+      font-size: 20pt;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.4px;
+      line-height: 1;
+    }
+
+    .title {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: #0284c7;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .contact-bar {
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 8.2pt;
+      color: #475569;
+    }
+
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    /* SECTIONS */
+    .section {
+      margin-bottom: 9px;
+    }
+
+    .section-title {
+      font-size: 9.5pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: #0f172a;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 2px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-title::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 11px;
+      background-color: #0284c7;
+      border-radius: 2px;
+    }
+
+    /* PERFIL */
+    .summary {
+      text-align: justify;
+      color: #334155;
+      font-size: 8.5pt;
+      line-height: 1.4;
+    }
+
+    /* SKILLS GRID */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 14px;
+      font-size: 8.2pt;
+    }
+
+    .skill-row {
+      display: flex;
+      gap: 4px;
+      line-height: 1.35;
+    }
+
+    .skill-label {
+      font-weight: 700;
+      color: #0f172a;
+      white-space: nowrap;
+    }
+
+    .skill-values {
+      color: #475569;
+    }
+
+    /* EXPERIENCIA */
+    .exp-item {
+      margin-bottom: 7px;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1px;
+    }
+
+    .exp-role {
+      font-size: 9pt;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .exp-company {
+      font-weight: 600;
+      color: #0284c7;
+    }
+
+    .exp-meta {
+      font-size: 7.8pt;
+      font-weight: 600;
+      color: #64748b;
+      white-space: nowrap;
+    }
+
+    .exp-list {
+      list-style-type: disc;
+      padding-left: 15px;
+      margin-top: 2px;
+    }
+
+    .exp-list li {
+      margin-bottom: 1.5px;
+      color: #334155;
+      font-size: 8.2pt;
+      line-height: 1.32;
+    }
+
+    .tech-pill-container {
+      margin-top: 2px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+    }
+
+    .tech-pill {
+      background-color: #f1f5f9;
+      color: #475569;
+      padding: 0.5px 5px;
+      border-radius: 3px;
+      font-size: 7.2pt;
+      font-weight: 600;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* EDUCACIÓN & CÉDULAS */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 10px;
+    }
+
+    .edu-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 3px solid #0284c7;
+      padding: 5px 8px;
+      border-radius: 4px;
+    }
+
+    .edu-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .edu-institution {
+      font-size: 7.8pt;
+      color: #475569;
+    }
+
+    .edu-badge {
+      display: inline-block;
+      margin-top: 2px;
+      font-size: 7.2pt;
+      font-weight: 700;
+      color: #0369a1;
+      background: #e0f2fe;
+      padding: 0.5px 4px;
+      border-radius: 3px;
+    }
+
+    /* FOOTER NOTE */
+    .footer-note {
+      text-align: center;
+      margin-top: 5px;
+      font-size: 7.5pt;
+      color: #94a3b8;
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-top">
+      <h1 class="name">MARIO DE LA CRUZ SANDOVAL</h1>
+      <div class="title">Software Developer &amp; Computer Engineer</div>
+    </div>
+    <div class="contact-bar">
+      <span class="contact-item">📍 Guadalajara, Jalisco, México</span>
+      <span class="contact-item">📱 +52 33 1218 2604</span>
+      <span class="contact-item">✉️ <a href="mailto:ing_mariomcs@outlook.com">ing_mariomcs@outlook.com</a></span>
+      <span class="contact-item">🔗 <a href="https://www.linkedin.com/in/ingmario/">linkedin.com/in/ingmario</a></span>
+      <span class="contact-item">💻 <a href="https://mariotip.github.io/">mariotip.github.io</a></span>
+      <span class="contact-item">🐙 <a href="https://github.com/mariotip">github.com/mariotip</a></span>
+    </div>
+  </header>
+
+  <!-- PERFIL PROFESIONAL -->
+  <section class="section">
+    <h2 class="section-title">Perfil Profesional</h2>
+    <p class="summary">
+      Ingeniero en computación y desarrollador de software con más de 8 años de experiencia diseñando y desplegando
+      soluciones
+      tecnológicas empresariales escalables y de alta disponibilidad. Especialista en arquitecturas desacopladas y
+      desarrollo Full Stack moderno (React, Angular, Vue.js, Node.js, Laravel), integración cloud en AWS (EC2,
+      Lightsail, S3, RDS) y modelado de bases de datos relacionales y NoSQL. Experiencia liderando equipos bajo marcos
+      ágiles (Scrum/Kanban), estandarizando buenas prácticas de ingeniería y optimizando infraestructuras críticas para
+      maximizar la continuidad de negocio.
+    </p>
+  </section>
+
+  <!-- HABILIDADES TÉCNICAS -->
+  <section class="section">
+    <h2 class="section-title">Competencias Técnicas</h2>
+    <div class="skills-grid">
+      <div class="skill-row">
+        <span class="skill-label">Frontend:</span>
+        <span class="skill-values">React, Angular, Vue.js, JavaScript (ES6+), TypeScript, HTML5, CSS3, Tailwind,
+          Bootstrap</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Backend &amp; APIs:</span>
+        <span class="skill-values">Node.js, Express, AdonisJS, PHP (Laravel), Python (Django), Microservicios, RESTful
+          APIs</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Bases de Datos &amp; ORM:</span>
+        <span class="skill-values">MySQL, PostgreSQL, MongoDB, Sequelize, Lucid ORM</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Cloud &amp; DevOps:</span>
+        <span class="skill-values">AWS (EC2, Lightsail, S3, RDS), Linux (Ubuntu), Git / Gitflow, Docker, CI/CD</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Metodologías:</span>
+        <span class="skill-values">Scrum, Kanban, Agile, Clean Architecture, Code Reviews</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Habilidades Blandas:</span>
+        <span class="skill-values">Liderazgo técnico, resolución estratégica, trabajo colaborativo, comunicación
+          asertiva</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA LABORAL -->
+  <section class="section">
+    <h2 class="section-title">Experiencia Laboral</h2>
+
+    <!-- GARANTÍA -->
+    <article class="exp-item">
+      <div class="exp-header">
+        <div>
+          <span class="exp-role">Software Developer &amp; Computer Engineer</span> — <span class="exp-company">Garantía
+            Leasing</span>
+        </div>
+        <span class="exp-meta">Marzo 2022 – Actualidad | Guadalajara, Jalisco</span>
+      </div>
+      <ul class="exp-list">
+        <li>Liderazgo técnico en el diseño e implementación de ecosistemas digitales financieros de alta
+          transaccionalidad.</li>
+        <li>Orquestación y despliegue de arquitecturas desacopladas con React y Angular sobre infraestructura resiliente
+          en AWS.</li>
+        <li>Desarrollo de servicios backend altamente escalables en Node.js y Sequelize con MySQL, reduciendo tiempos de
+          respuesta.</li>
+      </ul>
+      <div class="tech-pill-container">
+        <span class="tech-pill">React</span><span class="tech-pill">Angular</span><span
+          class="tech-pill">Node.js</span><span class="tech-pill">Sequelize</span><span
+          class="tech-pill">MySQL</span><span class="tech-pill">AWS</span><span class="tech-pill">Linux</span>
+      </div>
+    </article>
+
+    <!-- TURNAPP -->
+    <article class="exp-item">
+      <div class="exp-header">
+        <div>
+          <span class="exp-role">Solutions Engineer</span> — <span class="exp-company">Turnapp (Turn My App S.A. de
+            C.V.)</span>
+        </div>
+        <span class="exp-meta">Nov. 2020 – Jul. 2022 | Zapopan, Jalisco</span>
+      </div>
+      <ul class="exp-list">
+        <li>Ingeniería de soluciones Full Stack optimizadas para la automatización de procesos internos y plataformas
+          cliente.</li>
+        <li>Desarrollo modular de interfaces interactivas con Vue.js e integración con APIs transaccionales en Laravel
+          (PHP).</li>
+        <li>Administración y configuración de instancias cloud en AWS Lightsail sobre servidores Linux, garantizando
+          alta disponibilidad.</li>
+      </ul>
+      <div class="tech-pill-container">
+        <span class="tech-pill">Vue.js</span><span class="tech-pill">Laravel</span><span
+          class="tech-pill">PHP</span><span class="tech-pill">AWS Lightsail</span><span class="tech-pill">MySQL</span>
+      </div>
+    </article>
+
+    <!-- METAPACK -->
+    <article class="exp-item">
+      <div class="exp-header">
+        <div>
+          <span class="exp-role">Software Engineer</span> — <span class="exp-company">Metapack S.A. de C.V.</span>
+        </div>
+        <span class="exp-meta">Feb. 2020 – Abr. 2021 | Guadalajara, Jalisco</span>
+      </div>
+      <ul class="exp-list">
+        <li>Diseño y desarrollo de APIs industriales robustas y escalables para sincronización de inventarios y
+          logística continua.</li>
+        <li>Estandarización y modularización de bibliotecas de componentes frontend en Angular con interfaces
+          responsivas.</li>
+        <li>Optimización de entornos de servidor Linux y Apache asegurando continuidad operativa y estabilidad del
+          sistema.</li>
+      </ul>
+      <div class="tech-pill-container">
+        <span class="tech-pill">Angular</span><span class="tech-pill">Laravel</span><span
+          class="tech-pill">MySQL</span><span class="tech-pill">Linux</span><span class="tech-pill">Bootstrap</span>
+      </div>
+    </article>
+
+    <!-- SAMAHARA -->
+    <article class="exp-item">
+      <div class="exp-header">
+        <div>
+          <span class="exp-role">Full Stack Engineer</span> — <span class="exp-company">Samahara Startup</span>
+        </div>
+        <span class="exp-meta">Jul. 2019 – Feb. 2020 | Guadalajara, Jalisco</span>
+      </div>
+      <ul class="exp-list">
+        <li>Arquitectura y desarrollo de servicios backend en AdonisJS con MongoDB para aplicaciones de alta
+          escalabilidad.</li>
+        <li>Integración con aplicaciones móviles híbridas en React Native y microservicios sobre PostgreSQL y Django.
+        </li>
+      </ul>
+      <div class="tech-pill-container">
+        <span class="tech-pill">Node.js</span><span class="tech-pill">AdonisJS</span><span
+          class="tech-pill">MongoDB</span><span class="tech-pill">React Native</span><span
+          class="tech-pill">PostgreSQL</span><span class="tech-pill">Django</span>
+      </div>
+    </article>
+
+    <!-- ALTATEC -->
+    <article class="exp-item">
+      <div class="exp-header">
+        <div>
+          <span class="exp-role">Backend Developer</span> — <span class="exp-company">Altatec de Occidente S.A. de
+            C.V.</span>
+        </div>
+        <span class="exp-meta">Sept. 2017 – Jul. 2019 | Zapopan, Jalisco</span>
+      </div>
+      <ul class="exp-list">
+        <li>Arquitectura y desarrollo de APIs RESTful de alto rendimiento en Laravel y Node.js para procesamiento y
+          gestión de datos.</li>
+      </ul>
+      <div class="tech-pill-container">
+        <span class="tech-pill">Laravel</span><span class="tech-pill">PHP</span><span
+          class="tech-pill">Node.js</span><span class="tech-pill">MySQL</span><span class="tech-pill">AngularJS</span>
+      </div>
+    </article>
+
+    <!-- TRAYECTORIA PREVIA CONDENSADA -->
+    <article class="exp-item">
+      <div class="exp-header">
+        <div>
+          <span class="exp-role">Trayectoria Previa Relevante</span> — <span class="exp-company">Emergys Corp &amp;
+            Recab de México / IEHP</span>
+        </div>
+        <span class="exp-meta">2013 – 2017 | Guadalajara, Jalisco</span>
+      </div>
+      <ul class="exp-list">
+        <li><strong>Emergys Corp (2017):</strong> Consultoría en middleware (IBM Integration Bus) y desarrollo
+          empresarial en Java Spring.</li>
+        <li><strong>Recab de México / IEHP (2013–2017):</strong> Administración de servidores Linux/Windows, redes y
+          desarrollo web PHP/MySQL.</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- EDUCACIÓN -->
+  <section class="section">
+    <h2 class="section-title">Educación y Cédulas Profesionales</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-title">Ingeniería en Computación (Titulado)</div>
+        <div class="edu-institution">Universidad de Educación Superior Hermosa Provincia (2011–2015)</div>
+        <div class="edu-badge">Cédula Profesional: 13006410</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-title">Técnico en Instrumentación</div>
+        <div class="edu-institution">CECYTEJ Guadalajara No. 15</div>
+        <div class="edu-badge">Cédula Profesional: 6267477</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-note">
+    Referencias profesionales y cartera de proyectos disponibles previa solicitud.
+  </div>
+
+</body>
+
+</html>

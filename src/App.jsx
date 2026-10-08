@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { GitHub, LinkedIn, Email, ExpandMore, Storage, Dns, Cloud, Terminal, OpenInNew, DarkMode, LightMode, DesktopWindows, Settings, Facebook, Instagram, WhatsApp, People } from '@mui/icons-material';
+import { GitHub, LinkedIn, Email, ExpandMore, Storage, Dns, Cloud, Terminal, OpenInNew, DarkMode, LightMode, DesktopWindows, Settings, Facebook, Instagram, WhatsApp, People, Description } from '@mui/icons-material';
 import XIcon from '@mui/icons-material/X';
 // --- Datos actualizados con la trayectoria completa ---
 const personalInfo = {
@@ -360,14 +360,22 @@ export default function App() {
               <p className={`text-lg md:text-xl mb-10 leading-relaxed ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>
                 {personalInfo.summary}
               </p>
-              <div className="flex justify-center gap-4">
+              <div className="flex flex-wrap justify-center gap-4">
+                <a
+                  href="/CV_Mario_De_La_Cruz_Sandoval.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-500 text-white font-bold rounded-xl hover:opacity-95 hover:scale-105 transition-all flex items-center gap-2 shadow-lg shadow-blue-500/20"
+                >
+                  <Description className="w-4 h-4" /> Ver CV (PDF)
+                </a>
                 <a
                   href="#experiencia"
                   onClick={(e) => {
                     e.preventDefault();
                     scrollTo('experiencia');
                   }}
-                  className="px-8 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-all flex items-center gap-2"
+                  className="px-6 py-3 bg-blue-600/90 text-white font-bold rounded-xl hover:bg-blue-700 transition-all flex items-center gap-2"
                 >
                   Ver Trayectoria <ExpandMore className="w-4 h-4" />
                 </a>
@@ -377,7 +385,7 @@ export default function App() {
                     e.preventDefault();
                     scrollTo('contacto');
                   }}
-                  className={`px-8 py-3 border font-bold rounded-xl transition-all ${darkMode ? 'border-slate-700 hover:bg-slate-800' : 'border-gray-200 hover:bg-gray-50'}`}
+                  className={`px-6 py-3 border font-bold rounded-xl transition-all ${darkMode ? 'border-slate-700 hover:bg-slate-800' : 'border-gray-200 hover:bg-gray-50'}`}
                 >
                   Contacto
                 </a>
