@@ -276,7 +276,7 @@ export default function App() {
                 >
                   <LinkedIn className="w-5 h-5 text-[#0A66C2]" />
                 </a>
-                <a
+                {/* <a
                   href={personalInfo.social.twitter}
                   target="_blank"
                   rel="noreferrer"
@@ -285,7 +285,7 @@ export default function App() {
                   aria-label="Perfil de X (Twitter) de Mario De La Cruz Sandoval"
                 >
                   <XIcon className={`w-5 h-5 ${darkMode ? 'text-white' : 'text-black'}`} />
-                </a>
+                </a> */}
                 <a
                   href={personalInfo.social.whatsapp}
                   target="_blank"
@@ -296,7 +296,7 @@ export default function App() {
                 >
                   <WhatsApp className="w-5 h-5 text-[#25D366]" />
                 </a>
-                <a
+                {/* <a
                   href={personalInfo.social.facebook}
                   target="_blank"
                   rel="noreferrer"
@@ -305,8 +305,8 @@ export default function App() {
                   aria-label="Perfil de Facebook de Mario De La Cruz Sandoval"
                 >
                   <Facebook className="w-5 h-5 text-[#1877F2]" />
-                </a>
-                <a
+                </a> */}
+                {/* <a
                   href={personalInfo.social.instagram}
                   target="_blank"
                   rel="noreferrer"
@@ -315,7 +315,7 @@ export default function App() {
                   aria-label="Perfil de Instagram de Mario De La Cruz Sandoval"
                 >
                   <Instagram className="w-5 h-5 text-[#E4405F]" />
-                </a>
+                </a> */}
               </div>
             </div>
           </div>
@@ -496,9 +496,9 @@ export default function App() {
                 Especialista en convertir desafíos tecnológicos complejos en soluciones digitales escalables. Estoy disponible para liderar la evolución técnica de tu organización.
               </p>
               <div className="flex flex-wrap justify-center gap-6">
-                <a href={personalInfo.social.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-8 py-4 bg-blue-600 rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-xl shadow-blue-900/40">
+                {/* <a href={personalInfo.social.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-8 py-4 bg-blue-600 rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-xl shadow-blue-900/40">
                   <LinkedIn className="w-5 h-5" /> Mi Perfil Profesional
-                </a>
+                </a> */}
                 <a href={personalInfo.social.email} className={`flex items-center gap-3 px-8 py-4 border rounded-2xl font-bold transition-all ${darkMode ? 'border-slate-700 hover:bg-slate-800' : 'border-gray-200 hover:bg-white'}`}>
                   <Email className="w-5 h-5" /> Enviar Mensaje
                 </a>
