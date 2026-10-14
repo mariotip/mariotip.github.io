@@ -1,7 +1,40 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { GitHub, LinkedIn, Email, ExpandMore, Storage, Dns, Cloud, Terminal, OpenInNew, DarkMode, LightMode, DesktopWindows, Settings, Facebook, Instagram, WhatsApp, People, Description } from '@mui/icons-material';
+import { GitHub, LinkedIn, Email, ExpandMore, Storage, Dns, Cloud, Terminal, OpenInNew, DarkMode, LightMode, DesktopWindows, Settings, Facebook, Instagram, WhatsApp, People, Description, ShoppingBag, Dashboard } from '@mui/icons-material';
 import XIcon from '@mui/icons-material/X';
+
+const projects = [
+  {
+    title: "MKing E-Commerce",
+    subtitle: "Tienda Online & Catálogo Interactivo",
+    description: "Plataforma de comercio electrónico de alto impacto visual y rendimiento para la marca MKing. Integra visualización interactiva de productos, pasarela de pago con MercadoPago, diseño responsivo premium y optimización SEO.",
+    image: "/mking-ecommerce.jpeg",
+    logo: "/mking-logo.png",
+    url: "https://mking.com.mx/",
+    tags: ["React 18", "Vite", "TypeScript", "TailwindCSS", "MercadoPago SDK", "Zustand", "GSAP / Swiper"],
+    highlights: [
+      "Catálogo dinámico y experiencia de compra optimizada",
+      "Integración de pasarela MercadoPago Checkout",
+      "Modelos y visualizadores interactivos de producto",
+      "Arquitectura moderna con Vite y Zustand"
+    ]
+  },
+  {
+    title: "MKing Administrador (ERP & POS)",
+    subtitle: "Sistema de Gestión Empresarial Integral",
+    description: "Panel de administración centralizado para la operación integral de MKing. Control de inventarios en tiempo real, punto de venta (POS), gestión de pedidos, facturación, sincronización de envíos y métricas analíticas avanzadas.",
+    icon: <Dashboard className="w-8 h-8 text-teal-400" />,
+    logo: "/mking-logo.png",
+    url: "https://mking.com.mx/",
+    tags: ["React 18", "TypeScript", "Redux Toolkit / Zustand", "MUI Material", "Node.js / Express", "MySQL", "FullCalendar / AG Grid"],
+    highlights: [
+      "Gestión integral de inventario, stock y variantes de producto",
+      "Módulo POS y procesamiento de ventas presenciales y online",
+      "Dashboard de métricas, reportes financieros y exportación Excel",
+      "Control de usuarios con roles y permisos de acceso"
+    ]
+  }
+];
 // --- Datos actualizados con la trayectoria completa ---
 const personalInfo = {
   name: "Mario De La Cruz Sandoval",
@@ -232,6 +265,7 @@ export default function App() {
               {[
                 { name: 'Habilidades', id: 'habilidades' },
                 { name: 'Experiencia', id: 'experiencia' },
+                { name: 'Portafolio', id: 'portafolio' },
                 { name: 'Contacto', id: 'contacto' }
               ].map((item) => (
                 <a
@@ -362,10 +396,20 @@ export default function App() {
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <a
+                  href="#portafolio"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollTo('portafolio');
+                  }}
+                  className="px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-500 text-white font-bold rounded-xl hover:opacity-95 hover:scale-105 transition-all flex items-center gap-2 shadow-lg shadow-blue-500/20"
+                >
+                  <ShoppingBag className="w-4 h-4" /> Ver Portafolio
+                </a>
+                <a
                   href="/CV_Mario_De_La_Cruz_Sandoval.pdf"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-500 text-white font-bold rounded-xl hover:opacity-95 hover:scale-105 transition-all flex items-center gap-2 shadow-lg shadow-blue-500/20"
+                  className={`px-6 py-3 border font-bold rounded-xl transition-all flex items-center gap-2 ${darkMode ? 'border-slate-700 hover:bg-slate-800' : 'border-gray-200 hover:bg-gray-50'}`}
                 >
                   <Description className="w-4 h-4" /> Ver CV (PDF)
                 </a>
@@ -375,9 +419,9 @@ export default function App() {
                     e.preventDefault();
                     scrollTo('experiencia');
                   }}
-                  className="px-6 py-3 bg-blue-600/90 text-white font-bold rounded-xl hover:bg-blue-700 transition-all flex items-center gap-2"
+                  className={`px-6 py-3 border font-bold rounded-xl transition-all flex items-center gap-2 ${darkMode ? 'border-slate-700 hover:bg-slate-800' : 'border-gray-200 hover:bg-gray-50'}`}
                 >
-                  Ver Trayectoria <ExpandMore className="w-4 h-4" />
+                  Trayectoria <ExpandMore className="w-4 h-4" />
                 </a>
                 <a
                   href="#contacto"
@@ -479,6 +523,122 @@ export default function App() {
                     {/* Mobile Date Overlay */}
                     <div className="md:hidden order-first">
                       <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>
+                    </div>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Portfolio Section */}
+        <section id="portafolio" className={`py-24 ${darkMode ? 'bg-slate-800/20' : 'bg-slate-50'}`}>
+          <div className="max-w-7xl mx-auto px-6">
+            <FadeIn>
+              <SectionTitle subtitle>Portafolio de Proyectos</SectionTitle>
+              <p className={`text-center max-w-3xl mx-auto -mt-6 mb-16 text-base md:text-lg ${darkMode ? 'text-slate-400' : 'text-gray-600'}`}>
+                Sistemas en producción desarrollados con arquitecturas modernas, alto rendimiento y soluciones completas de extremo a extremo.
+              </p>
+            </FadeIn>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {projects.map((proj, idx) => (
+                <FadeIn key={idx} delay={idx * 150}>
+                  <div className={`rounded-3xl border overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-2xl ${
+                    darkMode
+                      ? 'bg-slate-900/80 border-slate-700/60 hover:border-blue-500/50'
+                      : 'bg-white border-gray-200 hover:border-blue-300 shadow-sm'
+                  }`}>
+                    {/* Visual Banner */}
+                    {proj.image ? (
+                      <div className="relative h-60 w-full overflow-hidden bg-slate-950 group">
+                        <img
+                          src={proj.image}
+                          alt={proj.title}
+                          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+                        <div className="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-700/60 flex items-center gap-2">
+                          <img src={proj.logo} alt="MKing Logo" className="h-4 w-auto object-contain" />
+                          <span className="text-xs font-semibold text-teal-400">En Producción</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="relative h-60 w-full overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 flex flex-col justify-between p-6 border-b border-slate-800">
+                        <div className="flex items-center justify-between">
+                          <div className="bg-slate-800/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-700/60 flex items-center gap-2">
+                            <img src={proj.logo} alt="MKing Logo" className="h-4 w-auto object-contain" />
+                            <span className="text-xs font-semibold text-teal-400">En Producción</span>
+                          </div>
+                          <span className="text-xs font-mono uppercase tracking-wider text-slate-400 bg-slate-800/60 px-3 py-1 rounded-full border border-slate-700/40">
+                            Enterprise ERP / POS
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-4 my-auto py-2">
+                          <div className="p-3.5 bg-blue-500/10 border border-blue-500/30 rounded-2xl shadow-inner text-blue-400">
+                            {proj.icon}
+                          </div>
+                          <div>
+                            <span className="text-xs font-bold text-blue-400 uppercase tracking-widest block">MKing Suite</span>
+                            <span className="text-2xl font-black text-white">Panel de Administración</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Content */}
+                    <div className="p-8 flex flex-col flex-grow">
+                      <div className="mb-4">
+                        <span className="text-xs font-bold text-teal-400 uppercase tracking-wider block mb-1">
+                          {proj.subtitle}
+                        </span>
+                        <h3 className="text-2xl font-bold">{proj.title}</h3>
+                      </div>
+
+                      <p className={`text-sm leading-relaxed mb-6 ${darkMode ? 'text-slate-300' : 'text-gray-600'}`}>
+                        {proj.description}
+                      </p>
+
+                      {/* Highlights */}
+                      <div className="mb-6 space-y-2">
+                        {proj.highlights.map((h, i) => (
+                          <div key={i} className="flex items-start gap-2 text-xs">
+                            <span className="text-teal-400 font-bold mt-0.5">✓</span>
+                            <span className={darkMode ? 'text-slate-300' : 'text-gray-700'}>{h}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Tech Stack */}
+                      <div className="flex flex-wrap gap-1.5 mt-auto pt-4 border-t border-slate-800/50">
+                        {proj.tags.map((tag, i) => (
+                          <span
+                            key={i}
+                            className={`text-xs px-2.5 py-1 rounded-lg font-medium ${
+                              darkMode
+                                ? 'bg-slate-800 text-slate-300 border border-slate-700/50'
+                                : 'bg-gray-100 text-gray-700 border border-gray-200'
+                            }`}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Actions */}
+                      <div className="mt-6 pt-4 flex items-center justify-between">
+                        <a
+                          href={proj.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-teal-500 text-white font-bold rounded-xl text-sm hover:opacity-95 hover:scale-105 transition-all shadow-md shadow-blue-500/20"
+                        >
+                          Visitar Sitio Oficial <OpenInNew className="w-4 h-4" />
+                        </a>
+                        <span className={`text-xs font-mono ${darkMode ? 'text-slate-500' : 'text-gray-400'}`}>
+                          mking.com.mx
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </FadeIn>
