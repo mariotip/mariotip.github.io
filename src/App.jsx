@@ -163,10 +163,10 @@ const useOnScreen = (options) => {
 
 const SectionTitle = ({ children, subtitle }) => (
   <div className="mb-12 text-center">
-    <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-400 inline-block mb-4 uppercase tracking-wider">
+    <h2 className="text-3xl md:text-5xl font-black text-shine inline-block mb-4 uppercase tracking-wider">
       {children}
     </h2>
-    {subtitle && <div className="w-20 h-1 bg-blue-500 mx-auto rounded-full"></div>}
+    {subtitle && <div className="w-24 h-1 mx-auto rounded-full bg-gradient-to-r from-blue-500 via-teal-400 to-violet-500"></div>}
   </div>
 );
 
@@ -183,6 +183,50 @@ const FadeIn = ({ children, delay = 0 }) => {
     </div>
   );
 };
+
+// Tarjeta con borde y brillo que siguen al cursor
+const Spotlight = ({ className = '', children }) => {
+  const onMove = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`);
+  };
+  return (
+    <div onMouseMove={onMove} className={`spotlight ${className}`}>
+      <div className="relative z-10 h-full flex flex-col">{children}</div>
+    </div>
+  );
+};
+
+// Contador animado que arranca al aparecer en pantalla
+const CountUp = ({ end, suffix = '', duration = 1600 }) => {
+  const [ref, visible] = useOnScreen({ threshold: 0.4 });
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    if (!visible) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { setValue(end); return; }
+    let raf;
+    const start = performance.now();
+    const tick = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      setValue(Math.round(end * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [visible, end, duration]);
+  return <span ref={ref}>{value}{suffix}</span>;
+};
+
+const techMarquee = ["React", "Angular", "Vue.js", "Node.js", "TypeScript", "Laravel", "AdonisJS", "Django", "MySQL", "MongoDB", "PostgreSQL", "AWS", "Linux", "TailwindCSS", "MUI", "Zustand", "Redux", "Git"];
+
+const stats = [
+  { value: 8, suffix: '+', label: 'Años de experiencia' },
+  { value: experience.length, suffix: '', label: 'Empresas' },
+  { value: projects.length, suffix: '', label: 'Sistemas en producción' },
+  { value: 20, suffix: '+', label: 'Tecnologías' },
+];
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -232,6 +276,28 @@ export default function App() {
     fetchAvatar();
   }, []);
 
+  // Barra de progreso de lectura
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const onScroll = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(h > 0 ? (window.scrollY / h) * 100 : 0);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Resalta en el menú la sección visible
+  useEffect(() => {
+    const ids = ['home', 'habilidades', 'experiencia', 'portafolio', 'contacto'];
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) setActiveSection(e.target.id); });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    ids.forEach((id) => { const el = document.getElementById(id); if (el) observer.observe(el); });
+    return () => observer.disconnect();
+  }, []);
+
   const toggleTheme = () => setDarkMode(!darkMode);
 
   const scrollTo = (id) => {
@@ -243,11 +309,22 @@ export default function App() {
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 font-sans ${darkMode ? 'bg-slate-900 text-slate-100' : 'bg-white text-gray-800'}`}>
+    <div className={`relative min-h-screen transition-colors duration-300 font-sans ${darkMode ? 'bg-slate-950 text-slate-100' : 'light bg-white text-gray-800'}`}>
+
+      {/* Fondo animado */}
+      <div className="aurora-bg" aria-hidden="true">
+        <div className="aurora-blob b1"></div>
+        <div className="aurora-blob b2"></div>
+        <div className="aurora-blob b3"></div>
+        <div className="grid-overlay"></div>
+      </div>
+
+      {/* Barra de progreso */}
+      <div className="fixed top-0 left-0 h-[3px] z-[60] bg-gradient-to-r from-blue-500 via-teal-400 to-violet-500 transition-[width] duration-100" style={{ width: `${progress}%` }} aria-hidden="true"></div>
 
       {/* Header & Navbar */}
       <header>
-        <nav className={`fixed top-0 w-full z-50 backdrop-blur-md transition-colors duration-300 ${darkMode ? 'bg-slate-900/80 border-b border-slate-800' : 'bg-white/80 border-b border-gray-200'}`} aria-label="Navegación principal">
+        <nav className={`fixed top-0 w-full z-50 backdrop-blur-md transition-colors duration-300 ${darkMode ? 'bg-slate-950/60 border-b border-white/5' : 'bg-white/80 border-b border-gray-200'}`} aria-label="Navegación principal">
           <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <a
               href="#home"
@@ -357,13 +434,12 @@ export default function App() {
       </header>
 
       {/* Main Content */}
-      <main id="main-content">
+      <main id="main-content" className="relative z-10">
         {/* Hero */}
-        <section id="home" className="min-h-screen flex items-center justify-center relative pt-20">
+        <section id="home" className="min-h-screen flex items-center justify-center relative pt-28 pb-24">
           <div className="text-center px-6 max-w-4xl">
             <FadeIn>
-              <div className="mb-6 relative inline-block">
-                <div className="absolute inset-0 bg-blue-500 blur-xl opacity-20 rounded-full"></div>
+              <div className="mb-8 relative inline-block avatar-ring">
                 {avatarUrl ? (
                   <img
                     src={avatarUrl}
@@ -372,10 +448,10 @@ export default function App() {
                     height="200"
                     loading="eager"
                     fetchPriority="high"
-                    className="relative w-50 h-50 rounded-full border-4 border-slate-800 object-cover mx-auto shadow-2xl"
+                    className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full border-4 border-slate-950 object-cover mx-auto shadow-2xl"
                   />
                 ) : (
-                  <div className="relative w-50 h-50 rounded-full border-4 border-slate-800 bg-slate-700 animate-pulse mx-auto shadow-2xl flex items-center justify-center">
+                  <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full border-4 border-slate-950 bg-slate-700 animate-pulse mx-auto shadow-2xl flex items-center justify-center">
                     <Settings className="w-12 h-12 text-slate-500 animate-spin" />
                   </div>
                 )}
@@ -384,13 +460,13 @@ export default function App() {
               <div className="inline-block px-4 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold mb-4 uppercase tracking-[0.2em]">
                 {personalInfo.title}
               </div>
-              <h3 className="text-4xl sm:text-6xl md:text-6xl font-black mb-6 leading-tight">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 leading-[1.05] tracking-tight">
                 <span className="block text-2xl sm:text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400 font-bold mb-2">
                   {personalInfo.name}
                 </span>
                 Escalando Negocios mediante <br />
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-400">Software de Clase Mundial</span>
-              </h3>
+                <span className="text-shine">Software de Clase Mundial</span>
+              </h1>
               <p className={`text-lg md:text-xl mb-10 leading-relaxed ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>
                 {personalInfo.summary}
               </p>
@@ -401,7 +477,7 @@ export default function App() {
                     e.preventDefault();
                     scrollTo('portafolio');
                   }}
-                  className="px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-500 text-white font-bold rounded-xl hover:opacity-95 hover:scale-105 transition-all flex items-center gap-2 shadow-lg shadow-blue-500/20"
+                  className="btn-glow px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-500 text-white font-bold rounded-xl hover:scale-105 transition-all flex items-center gap-2 shadow-lg shadow-blue-500/40"
                 >
                   <ShoppingBag className="w-4 h-4" /> Ver Portafolio
                 </a>
@@ -435,18 +511,46 @@ export default function App() {
                 </a>
               </div>
             </FadeIn>
+
+            {/* Estadísticas */}
+            <FadeIn delay={300}>
+              <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+                {stats.map((st, i) => (
+                  <div key={i} className={`rounded-2xl border px-4 py-5 backdrop-blur-md ${darkMode ? 'bg-white/[0.03] border-white/10' : 'bg-white/70 border-gray-200'}`}>
+                    <div className="text-3xl sm:text-4xl font-black text-shine"><CountUp end={st.value} suffix={st.suffix} /></div>
+                    <div className={`mt-1 text-xs uppercase tracking-wider font-semibold ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>{st.label}</div>
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
           </div>
+
+          {/* Indicador de scroll */}
+          <button onClick={() => scrollTo('habilidades')} className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex w-6 h-10 rounded-full border-2 border-slate-500/60 justify-center pt-2" aria-label="Bajar a habilidades">
+            <span className="scroll-dot w-1 h-2 rounded-full bg-teal-400"></span>
+          </button>
         </section>
 
+        {/* Carrusel de tecnologías */}
+        <div className={`marquee overflow-hidden py-6 border-y ${darkMode ? 'border-white/5 bg-white/[0.02]' : 'border-gray-100 bg-gray-50/60'}`} aria-label="Tecnologías">
+          <div className="marquee-track">
+            {[...techMarquee, ...techMarquee].map((t, i) => (
+              <span key={i} className={`mx-6 text-lg sm:text-2xl font-black uppercase tracking-wider whitespace-nowrap ${darkMode ? 'text-slate-600 hover:text-teal-400' : 'text-gray-300 hover:text-blue-500'} transition-colors`}>
+                {t} <span className="text-blue-500/60 ml-6">✦</span>
+              </span>
+            ))}
+          </div>
+        </div>
+
         {/* Skills */}
-        <section id="habilidades" className={`py-24 ${darkMode ? 'bg-slate-800/20' : 'bg-slate-50'}`}>
+        <section id="habilidades" className="py-24">
           <div className="max-w-7xl mx-auto px-6">
             <FadeIn><SectionTitle subtitle>Stack de Especialidades</SectionTitle></FadeIn>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
               {skills.map((s, i) => (
                 <FadeIn key={i} delay={i * 100}>
-                  <div className={`p-8 rounded-3xl border h-full transition-all hover:shadow-2xl ${darkMode ? 'bg-slate-900 border-slate-700 hover:border-blue-500/30' : 'bg-white border-gray-100 hover:border-blue-200'}`}>
-                    <div className="text-blue-500 mb-4">{s.icon}</div>
+                  <Spotlight className={`p-7 rounded-3xl border h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/10 ${darkMode ? 'bg-slate-900/60 backdrop-blur-md border-white/10' : 'bg-white/80 backdrop-blur-md border-gray-100'}`}>
+                    <div className="w-12 h-12 mb-5 rounded-2xl flex items-center justify-center text-white bg-gradient-to-br from-blue-500 to-teal-400 shadow-lg shadow-blue-500/30">{s.icon}</div>
                     <h3 className="text-lg font-bold mb-4">{s.category}</h3>
                     <div className="flex flex-wrap gap-2">
                       {s.items.map((item, idx) => (
@@ -455,7 +559,7 @@ export default function App() {
                         </span>
                       ))}
                     </div>
-                  </div>
+                  </Spotlight>
                 </FadeIn>
               ))}
             </div>
@@ -468,13 +572,13 @@ export default function App() {
             <FadeIn><SectionTitle subtitle>Trayectoria Completa</SectionTitle></FadeIn>
             <div className="relative mt-16">
               {/* Main Line */}
-              <div className={`absolute left-0 md:left-1/2 top-0 bottom-0 w-px ${darkMode ? 'bg-slate-800' : 'bg-gray-200'} hidden md:block`}></div>
+              <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 bg-gradient-to-b from-blue-500 via-teal-400 to-violet-500/0 hidden md:block"></div>
 
               {experience.map((exp, i) => (
                 <FadeIn key={i} delay={i * 50}>
                   <div className={`relative flex flex-col md:flex-row gap-8 mb-16`}>
                     {/* Circle Dot Desktop */}
-                    <div className="absolute left-1/2 top-0 w-3 h-3 bg-blue-500 rounded-full -translate-x-1/2 mt-2 hidden md:block"></div>
+                    <div className="absolute left-1/2 top-0 w-4 h-4 bg-teal-400 rounded-full -translate-x-1/2 mt-2 hidden md:block ring-4 ring-teal-400/20 shadow-[0_0_20px_rgba(45,212,191,0.8)]"></div>
 
                     <div className="md:w-1/2 flex flex-col items-start md:items-end">
                       {i % 2 === 0 ? (
@@ -483,7 +587,7 @@ export default function App() {
                           <h4 className="text-sm text-slate-500">{exp.location}</h4>
                         </div>
                       ) : (
-                        <div className={`p-6 rounded-3xl border w-full transition-all hover:shadow-xl ${darkMode ? 'bg-slate-900/50 border-slate-700/50' : 'bg-white border-gray-200/80 shadow-sm'}`}>
+                        <div className={`p-6 rounded-3xl border w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/10 ${darkMode ? 'bg-slate-900/60 backdrop-blur-md border-white/10 hover:border-teal-400/40' : 'bg-white/80 backdrop-blur-md border-gray-200/80 shadow-sm hover:border-teal-300'}`}>
                           <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>
                           <h3 className="text-xl font-black mt-2">{exp.role}</h3>
                           <a href={exp.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-teal-400 font-bold mb-3 hover:text-teal-300 transition-colors group">
@@ -505,7 +609,7 @@ export default function App() {
                           <h4 className="text-sm text-slate-500">{exp.location}</h4>
                         </div>
                       ) : (
-                        <div className={`p-6 rounded-3xl border w-full transition-all hover:shadow-xl ${darkMode ? 'bg-slate-900/50 border-slate-700/50' : 'bg-white border-gray-200/80 shadow-sm'}`}>
+                        <div className={`p-6 rounded-3xl border w-full transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/10 ${darkMode ? 'bg-slate-900/60 backdrop-blur-md border-white/10 hover:border-teal-400/40' : 'bg-white/80 backdrop-blur-md border-gray-200/80 shadow-sm hover:border-teal-300'}`}>
                           <span className="text-xs font-bold text-blue-500 uppercase">{exp.period}</span>
                           <h3 className="text-xl font-black mt-2">{exp.role}</h3>
                           <a href={exp.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-teal-400 font-bold mb-3 hover:text-teal-300 transition-colors group">
@@ -532,7 +636,7 @@ export default function App() {
         </section>
 
         {/* Portfolio Section */}
-        <section id="portafolio" className={`py-24 ${darkMode ? 'bg-slate-800/20' : 'bg-slate-50'}`}>
+        <section id="portafolio" className="py-24">
           <div className="max-w-7xl mx-auto px-6">
             <FadeIn>
               <SectionTitle subtitle>Portafolio de Proyectos</SectionTitle>
@@ -544,10 +648,10 @@ export default function App() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {projects.map((proj, idx) => (
                 <FadeIn key={idx} delay={idx * 150}>
-                  <div className={`rounded-3xl border overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-2xl ${
+                  <Spotlight className={`rounded-3xl border overflow-hidden h-full transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-blue-500/20 ${
                     darkMode
-                      ? 'bg-slate-900/80 border-slate-700/60 hover:border-blue-500/50'
-                      : 'bg-white border-gray-200 hover:border-blue-300 shadow-sm'
+                      ? 'bg-slate-900/60 backdrop-blur-md border-white/10'
+                      : 'bg-white/80 backdrop-blur-md border-gray-200 shadow-sm'
                   }`}>
                     {/* Visual Banner */}
                     {proj.image ? (
@@ -640,7 +744,7 @@ export default function App() {
                         </span>
                       </div>
                     </div>
-                  </div>
+                  </Spotlight>
                 </FadeIn>
               ))}
             </div>
@@ -648,20 +752,31 @@ export default function App() {
         </section>
 
         {/* Contact */}
-        <section id="contacto" className={`py-24 ${darkMode ? 'bg-blue-600/10' : 'bg-blue-50'}`}>
-          <div className="max-w-4xl mx-auto px-6 text-center">
+        <section id="contacto" className="py-24">
+          <div className="max-w-5xl mx-auto px-6">
             <FadeIn>
-              <h2 className="text-4xl font-black mb-8">Hablemos de tu próximo proyecto</h2>
-              <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
-                Especialista en convertir desafíos tecnológicos complejos en soluciones digitales escalables. Estoy disponible para liderar la evolución técnica de tu organización.
-              </p>
-              <div className="flex flex-wrap justify-center gap-6">
-                {/* <a href={personalInfo.social.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-8 py-4 bg-blue-600 rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-xl shadow-blue-900/40">
-                  <LinkedIn className="w-5 h-5" /> Mi Perfil Profesional
-                </a> */}
-                <a href={personalInfo.social.email} className={`flex items-center gap-3 px-8 py-4 border rounded-2xl font-bold transition-all ${darkMode ? 'border-slate-700 hover:bg-slate-800' : 'border-gray-200 hover:bg-white'}`}>
-                  <Email className="w-5 h-5" /> Enviar Mensaje
-                </a>
+              <div className="relative overflow-hidden rounded-[2rem] p-[1px] bg-gradient-to-br from-blue-500 via-teal-400 to-violet-500 shadow-2xl shadow-blue-500/20">
+                <div className={`relative rounded-[calc(2rem-1px)] px-6 py-16 sm:px-12 text-center ${darkMode ? 'bg-slate-950/90' : 'bg-white/95'}`}>
+                  <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 bg-teal-400/20 blur-3xl rounded-full pointer-events-none"></div>
+                  <span className="relative inline-flex items-center gap-2 px-4 py-1 mb-6 rounded-full text-xs font-bold uppercase tracking-[0.2em] border border-teal-400/30 bg-teal-400/10 text-teal-400">
+                    <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span> Disponible para proyectos
+                  </span>
+                  <h2 className="relative text-4xl sm:text-5xl font-black mb-6 leading-tight">Hablemos de tu <span className="text-shine">próximo proyecto</span></h2>
+                  <p className={`relative text-lg mb-10 max-w-2xl mx-auto ${darkMode ? 'text-slate-400' : 'text-gray-600'}`}>
+                    Especialista en convertir desafíos tecnológicos complejos en soluciones digitales escalables. Estoy disponible para liderar la evolución técnica de tu organización.
+                  </p>
+                  <div className="relative flex flex-wrap justify-center gap-4">
+                    <a href={personalInfo.social.email} className="btn-glow flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-teal-500 text-white rounded-2xl font-bold hover:scale-105 transition-all shadow-lg shadow-blue-500/40">
+                      <Email className="w-5 h-5" /> Enviar Mensaje
+                    </a>
+                    <a href={personalInfo.social.whatsapp} target="_blank" rel="noreferrer" className={`flex items-center gap-3 px-8 py-4 border rounded-2xl font-bold hover:scale-105 transition-all ${darkMode ? 'border-white/15 hover:bg-white/5' : 'border-gray-200 hover:bg-gray-50'}`}>
+                      <WhatsApp className="w-5 h-5 text-[#25D366]" /> WhatsApp
+                    </a>
+                    <a href={personalInfo.social.linkedin} target="_blank" rel="noreferrer" className={`flex items-center gap-3 px-8 py-4 border rounded-2xl font-bold hover:scale-105 transition-all ${darkMode ? 'border-white/15 hover:bg-white/5' : 'border-gray-200 hover:bg-gray-50'}`}>
+                      <LinkedIn className="w-5 h-5 text-[#0A66C2]" /> LinkedIn
+                    </a>
+                  </div>
+                </div>
               </div>
             </FadeIn>
           </div>
@@ -669,7 +784,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-slate-800 text-center opacity-60 text-sm">
+      <footer className="relative z-10 py-12 border-t border-slate-800 text-center opacity-60 text-sm">
         <p>© {new Date().getFullYear()} {personalInfo.name} — Guadalajara, Jalisco</p>
       </footer>
     </div>

@@ -3,3 +3,160 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* ---------- Fondo animado (aurora + grid) ---------- */
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.35;
+  animation: aurora-float 18s ease-in-out infinite;
+  will-change: transform;
+}
+.aurora-blob.b1 { width: 42vw; height: 42vw; top: -12vw; left: -10vw; background: #2563eb; }
+.aurora-blob.b2 { width: 36vw; height: 36vw; top: 20vh; right: -12vw; background: #14b8a6; animation-delay: -6s; animation-duration: 22s; }
+.aurora-blob.b3 { width: 30vw; height: 30vw; bottom: -10vw; left: 30vw; background: #7c3aed; animation-delay: -12s; animation-duration: 26s; opacity: 0.22; }
+.light .aurora-blob { opacity: 0.18; }
+
+@keyframes aurora-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(6vw, -4vh) scale(1.12); }
+  66% { transform: translate(-4vw, 5vh) scale(0.92); }
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%);
+}
+
+/* ---------- Texto con gradiente animado ---------- */
+.text-shine {
+  background: linear-gradient(90deg, #60a5fa, #2dd4bf, #a78bfa, #60a5fa);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 8s linear infinite;
+}
+@keyframes shine {
+  to { background-position: 300% 0; }
+}
+
+/* ---------- Anillo giratorio del avatar ---------- */
+.avatar-ring {
+  position: relative;
+  padding: 4px;
+  border-radius: 9999px;
+  isolation: isolate;
+}
+.avatar-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg, #3b82f6, #2dd4bf, #a78bfa, #3b82f6);
+  animation: spin 6s linear infinite;
+  z-index: -1;
+}
+.avatar-ring::after {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg, #3b82f6, #2dd4bf, #a78bfa, #3b82f6);
+  filter: blur(28px);
+  opacity: 0.45;
+  animation: spin 6s linear infinite;
+  z-index: -2;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Tarjetas con brillo que sigue al cursor ---------- */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(45, 212, 191, 0.75), transparent 45%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 2;
+}
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(59, 130, 246, 0.12), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 1;
+}
+.spotlight:hover::before,
+.spotlight:hover::after { opacity: 1; }
+
+/* ---------- Carrusel infinito de tecnologías ---------- */
+.marquee {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ---------- Indicador de scroll ---------- */
+.scroll-dot { animation: scroll-dot 1.8s ease-in-out infinite; }
+@keyframes scroll-dot {
+  0% { transform: translateY(0); opacity: 1; }
+  80% { transform: translateY(14px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+/* ---------- Botón con brillo ---------- */
+.btn-glow { position: relative; overflow: hidden; }
+.btn-glow::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -60%;
+  width: 40%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-20deg);
+  animation: btn-sweep 3.5s ease-in-out infinite;
+}
+@keyframes btn-sweep {
+  0%, 60% { left: -60%; }
+  100% { left: 130%; }
+}
+
+/* ---------- Accesibilidad: menos movimiento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob, .text-shine, .avatar-ring::before, .avatar-ring::after,
+  .marquee-track, .scroll-dot, .btn-glow::after { animation: none !important; }
+}
