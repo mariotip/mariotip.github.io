@@ -11,12 +11,12 @@ const projects = [
     image: "/mking-ecommerce.jpeg",
     logo: "/mking-logo.png",
     url: "https://mking.com.mx/",
-    tags: ["React 18", "Vite", "TypeScript", "TailwindCSS", "MercadoPago SDK", "Zustand", "GSAP / Swiper"],
+    tags: ["Next.js 14", "React 18", "TypeScript", "TailwindCSS", "MercadoPago SDK", "Zustand", "GSAP / Swiper"],
     highlights: [
       "Catálogo dinámico y experiencia de compra optimizada",
       "Integración de pasarela MercadoPago Checkout",
       "Modelos y visualizadores interactivos de producto",
-      "Arquitectura moderna con Vite y Zustand"
+      "Arquitectura moderna con Next.js (App Router) y Zustand"
     ]
   },
   {
