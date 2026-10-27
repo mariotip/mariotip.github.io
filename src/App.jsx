@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { GitHub, LinkedIn, Email, ExpandMore, Storage, Dns, Cloud, Terminal, OpenInNew, DarkMode, LightMode, DesktopWindows, Settings, Facebook, Instagram, WhatsApp, People, Description, ShoppingBag, Dashboard } from '@mui/icons-material';
+import { GitHub, LinkedIn, Email, ExpandMore, Storage, Dns, Cloud, Terminal, OpenInNew, DarkMode, LightMode, DesktopWindows, Settings, Facebook, Instagram, WhatsApp, People, Description, ShoppingBag } from '@mui/icons-material';
 import XIcon from '@mui/icons-material/X';
 
 const projects = [
@@ -11,6 +11,7 @@ const projects = [
     image: "/mking-ecommerce.jpeg",
     logo: "/mking-logo.png",
     url: "https://mking.com.mx/",
+    siteLabel: "mking.com.mx",
     tags: ["Next.js 14", "React 18", "TypeScript", "TailwindCSS", "MercadoPago SDK", "Zustand", "GSAP / Swiper"],
     highlights: [
       "Catálogo dinámico y experiencia de compra optimizada",
@@ -23,15 +24,46 @@ const projects = [
     title: "MKing Administrador (ERP & POS)",
     subtitle: "Sistema de Gestión Empresarial Integral",
     description: "Panel de administración centralizado para la operación integral de MKing. Control de inventarios en tiempo real, punto de venta (POS), gestión de pedidos, facturación, sincronización de envíos y métricas analíticas avanzadas.",
-    icon: <Dashboard className="w-8 h-8 text-teal-400" />,
+    image: "/mking-admin.jpeg",
     logo: "/mking-logo.png",
     url: "https://mking.com.mx/",
+    siteLabel: "mking.com.mx",
     tags: ["React 18", "TypeScript", "Redux Toolkit / Zustand", "MUI Material", "Node.js / Express", "MySQL", "FullCalendar / AG Grid"],
     highlights: [
       "Gestión integral de inventario, stock y variantes de producto",
       "Módulo POS y procesamiento de ventas presenciales y online",
       "Dashboard de métricas, reportes financieros y exportación Excel",
       "Control de usuarios con roles y permisos de acceso"
+    ]
+  },
+  {
+    title: "Envíomex POS / ERP / CRM",
+    subtitle: "Punto de Venta y Gestión de Paquetería",
+    description: "Sistema integral para operación de paqueterías: punto de venta, cotizaciones, recepción y seguimiento de paquetes, caja, inventario, CRM y métricas de finanzas, punto de equilibrio y marketing, con comprobantes en hoja y ticket térmico.",
+    image: "/enviomex-pos.jpeg",
+    url: "https://enviomex-front.pages.dev/iniciar-sesion",
+    siteLabel: "enviomex-front.pages.dev",
+    tags: ["React 18", "Vite", "TypeScript", "MUI Material", "AG Grid", "Zustand", "AdonisJS", "Node.js"],
+    highlights: [
+      "Punto de venta y cotizaciones con cálculos en vivo (margen, cambio, piezas por paquete)",
+      "Seguimiento de paquetes, caja y cortes, e inventario por sucursal",
+      "CRM y panel de finanzas, punto de equilibrio, marketing y metas",
+      "Control de usuarios con roles y permisos por pantalla"
+    ]
+  },
+  {
+    title: "Sonovita",
+    subtitle: "Marketplace de Equipos de Ultrasonido",
+    description: "Marketplace especializado en equipos de ultrasonido nuevos y seminuevos para profesionales de la salud, con catálogo de producto, panel administrativo para publicaciones y gestión de contenido.",
+    image: "/sonovita-marketplace.jpeg",
+    url: "https://sonovita-front.vercel.app/",
+    siteLabel: "sonovita-front.vercel.app",
+    tags: ["Next.js 16", "React 19", "TailwindCSS 4", "Laravel 12", "Filament 4", "Laravel Sanctum"],
+    highlights: [
+      "Catálogo de equipos de ultrasonido nuevos y seminuevos",
+      "Panel administrativo (Filament) para gestión de publicaciones",
+      "API REST con autenticación vía Laravel Sanctum",
+      "Frontend moderno con Next.js App Router y Tailwind v4"
     ]
   }
 ];
@@ -663,7 +695,7 @@ export default function App() {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                         <div className="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-700/60 flex items-center gap-2">
-                          <img src={proj.logo} alt="MKing Logo" className="h-4 w-auto object-contain" />
+                          {proj.logo && <img src={proj.logo} alt={`${proj.title} Logo`} className="h-4 w-auto object-contain" />}
                           <span className="text-xs font-semibold text-teal-400">En Producción</span>
                         </div>
                       </div>
@@ -671,11 +703,11 @@ export default function App() {
                       <div className="relative h-60 w-full overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 flex flex-col justify-between p-6 border-b border-slate-800">
                         <div className="flex items-center justify-between">
                           <div className="bg-slate-800/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-700/60 flex items-center gap-2">
-                            <img src={proj.logo} alt="MKing Logo" className="h-4 w-auto object-contain" />
+                            {proj.logo && <img src={proj.logo} alt={`${proj.title} Logo`} className="h-4 w-auto object-contain" />}
                             <span className="text-xs font-semibold text-teal-400">En Producción</span>
                           </div>
                           <span className="text-xs font-mono uppercase tracking-wider text-slate-400 bg-slate-800/60 px-3 py-1 rounded-full border border-slate-700/40">
-                            Enterprise ERP / POS
+                            {proj.category}
                           </span>
                         </div>
                         <div className="flex items-center gap-4 my-auto py-2">
@@ -683,8 +715,8 @@ export default function App() {
                             {proj.icon}
                           </div>
                           <div>
-                            <span className="text-xs font-bold text-blue-400 uppercase tracking-widest block">MKing Suite</span>
-                            <span className="text-2xl font-black text-white">Panel de Administración</span>
+                            <span className="text-xs font-bold text-blue-400 uppercase tracking-widest block">{proj.brandLabel}</span>
+                            <span className="text-2xl font-black text-white">{proj.brandTitle}</span>
                           </div>
                         </div>
                       </div>
@@ -740,7 +772,7 @@ export default function App() {
                           Visitar Sitio Oficial <OpenInNew className="w-4 h-4" />
                         </a>
                         <span className={`text-xs font-mono ${darkMode ? 'text-slate-500' : 'text-gray-400'}`}>
-                          mking.com.mx
+                          {proj.siteLabel}
                         </span>
                       </div>
                     </div>
